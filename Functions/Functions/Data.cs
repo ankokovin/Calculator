@@ -27,7 +27,20 @@ namespace Functions
             if (Input.Length > 26) throw new Exception("Слишком большая строка");
             Regex check = new Regex("^-?[0-9]+$");
             if (!check.IsMatch(Input)) throw new Exception("Неверное представление");
-            throw new NotImplementedException();
+            if (Input[0] == '-')
+            {
+                Plus = false;
+                Input.Remove(0, 1);
+            }
+            if (Input.Length > 25) throw new Exception("Слишком большая строка");
+            while (Input.Length>5)
+            {
+                Digits[Count] = uint.Parse(Input.Substring(Input.Length - 5));
+                Count++;
+                Input.Remove(Input.Length - 5);
+            }
+            Digits[Count]= uint.Parse(Input);
+            Count++;
         }
         public static bool operator < (Data first, Data second)
         {
