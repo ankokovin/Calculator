@@ -10,8 +10,15 @@ using System.Threading.Tasks;
 
 namespace Functions
 {
+    /// <summary>
+    /// Непосредственно хранит длинные числа и содержит реализацию функций сложения, вычитания, умножения, целочисленного и нет деления
+    /// Способ хранения: массив из <see cref="N"/> разрядов <see cref="Base"/>-ичной системы исчисления типа <see cref="long"/>
+    /// </summary>
     public class Data
     {
+        /// <summary>
+        /// Количество используемых разрядов
+        /// </summary>
         int Count
         {
             get
@@ -20,15 +27,34 @@ namespace Functions
                 return 1;
             }
         }
+        /// <summary>
+        /// Максимальное количество разрядов
+        /// </summary>
         const int N = 5;
+        /// <summary>
+        /// Массив элементов типа <see cref="long"/>, хранящий разряды
+        /// </summary>
         long[] Digits = new long[N];
+        /// <summary>
+        /// Является ли данное число типа <see cref="Data"/> положительным
+        /// </summary>
         bool Plus = true;
+        /// <summary>
+        /// Основание СИ
+        /// </summary>
         const int Base = 100000;
-        public Data() //инициализируется число 0
+        /// <summary>
+        /// Инициализация числа 0 типа <see cref="Data"/>
+        /// </summary>
+        public Data()
         {
             
         }
-        public Data(string Input) //инициализируется длинное число по строке
+        /// <summary>
+        /// Инициализация числа типа <see cref="Data"/> по строке <see cref="string"/>
+        /// </summary>
+        /// <param name="Input">Входная строка <see cref="string"/></param>
+        public Data(string Input) 
         {
             if (Input.Length > 26) throw new Exception("Слишком большая строка");
             Regex check = new Regex("^-?[0-9]+$");
@@ -82,7 +108,11 @@ namespace Functions
         {
             return !(first == second);
         }
-#endregion Операторы сравнения
+        #endregion Операторы сравнения
+        /// <summary>
+        /// Глубокое копирование данного числа  <see cref="Data"/> 
+        /// </summary>
+        /// <returns>Копия данного числа типа  <see cref="Data"/> </returns>
         public Data Copy()
         {
             Data result = new Data();
@@ -90,6 +120,9 @@ namespace Functions
             result.Plus = Plus;
             return result;
         }
+        /// <summary>
+        /// Самое большое возможное число типа  <see cref="Data"/> 
+        /// </summary>
         public static Data MaxValue
         {
             get
@@ -97,6 +130,9 @@ namespace Functions
                 return new Data("9999999999999999999999999");
             }
         }
+        /// <summary>
+        /// Представление единицы в число типа  <see cref="Data"/> 
+        /// </summary>
         public static Data One
         {
             get
@@ -112,6 +148,12 @@ namespace Functions
          *          Наименьший следует использовать в качестве вычитаемого!
          * 
          */ 
+         /// <summary>
+         /// Сложение двух чисел типа <see cref="Data"/>
+         /// </summary>
+         /// <param name="first">Первое слагаемое типа <see cref="Data"/></param>
+         /// <param name="second">Второе слагаемое типа <see cref="Data"/></param>
+         /// <returns>Сумма слагаемых типа <see cref="Data"/></returns>
         public static Data operator + (Data first, Data second)
         {
             if (first.Plus != second.Plus)//если числа разных знаков, то следует юзать разность
@@ -175,6 +217,12 @@ namespace Functions
          *          2) Разные знаки -> Свести к сложению
          *               a-b=a+(-b)
          */
+         /// <summary>
+         /// Вычитание двух чисел типа <see cref="Data"/>
+         /// </summary>
+         /// <param name="first">Уменьшаемое типа <see cref="Data"/></param>
+         /// <param name="second">Вычитаемое типа <see cref="Data"/></param>
+         /// <returns>Разность типа <see cref="Data"/></returns>
         public static Data operator -(Data first, Data second)
         {
             if (first.Plus != second.Plus)
@@ -196,6 +244,12 @@ namespace Functions
             return result;
         }
         //Умножение - обычное, столбиком
+        /// <summary>
+        /// Умножение двух чисел типа <see cref="Data"/>
+        /// </summary>
+        /// <param name="first">Первый множитель типа <see cref="Data"/></param>
+        /// <param name="second">Второй множитель типа <see cref="Data"/></param>
+        /// <returns>Произведение типа <see cref="Data"/></returns>
         public static Data operator *(Data first, Data second)
         {
             if (first.Count + second.Count - 1 > N) throw new Exception("Результат вышел за пределы 25 знаков");
@@ -223,6 +277,11 @@ namespace Functions
             } 
             catch (IndexOutOfRangeException) { throw new Exception("Результат вышел за пределы 25 знаков"); }
         }
+        /// <summary>
+        /// Модуль данного числа типа  <see cref="Data"/> 
+        /// </summary>
+        /// <param name="input">Исходное число типа  <see cref="Data"/> </param>
+        /// <returns>Модуль данного числа типа  <see cref="Data"/> </returns>
         public static Data Abs(Data input)
         {
             Data result = input.Copy();
@@ -230,6 +289,12 @@ namespace Functions
             return result;
         }
         //Целочисленное деление длинных
+        /// <summary>
+        /// Целочисленное деление чисел типа <see cref="Data"/>
+        /// </summary>
+        /// <param name="first">Делимое типа <see cref="Data"/></param>
+        /// <param name="second">Делитель типа <see cref="Data"/></param>
+        /// <returns>Частное типа <see cref="Data"/></returns>
         public static Data operator /(Data first, Data second)
         {
             if (second == new Data()) throw new Exception("Деление на 0");
@@ -256,6 +321,12 @@ namespace Functions
             else return right;
         }
         //Целочисленное деление на короткое число
+        /// <summary>
+        /// Целочисленное деление числа типа <see cref="Data"/> на число типа <see cref="int"/>
+        /// </summary>
+        /// <param name="first">Делимое типа <see cref="Data"/></param>
+        /// <param name="second">Делитель типа <see cref="int"/></param>
+        /// <returns>Частное типа <see cref="Data"/></returns>
         public static Data operator / (Data input,int div)
         {
             if (div >= Base) throw new Exception("Делитель - слишком длинное число.");
@@ -271,6 +342,12 @@ namespace Functions
                 return result;
         }
         //Деление короткого на длинное
+        /// <summary>
+        /// Целочисленное деление числа типа <see cref="long"/> на число типа <see cref="Data"/>
+        /// </summary>
+        /// <param name="first">Делимое типа <see cref="long"/></param>
+        /// <param name="second">Делитель типа <see cref="Data"/></param>
+        /// <returns>Частное типа <see cref="Data"/></returns>
         public static double operator / (long first, Data second)
         {
             double div = 0;
@@ -278,6 +355,12 @@ namespace Functions
             return first / div;
         }
         //Деление длинных
+        /// <summary>
+        /// Деление (нецелочисленное) чисел типа  <see cref="Data"/> 
+        /// </summary>
+        /// <param name="first">Делимое типа  <see cref="Data"/> </param>
+        /// <param name="second">Делитель типа  <see cref="Data"/> </param>
+        /// <returns>Частное типа  <see cref="double"/> </returns>
         public static double Divide (Data first, Data second)
         {
             if (second == new Data()) throw new Exception("Деление на 0");
@@ -290,6 +373,12 @@ namespace Functions
             return result;
         }
         //Остаток от деления
+        /// <summary>
+        /// Остаток от деления двух чисел типа <see cref="Data"/>
+        /// </summary>
+        /// <param name="first">Делимое типа  <see cref="Data"/> </param>
+        /// <param name="second">Делитель типа  <see cref="Data"/> </param>
+        /// <returns>Остаток типа <see cref="Data"/></returns>
         public static Data operator %(Data first, Data second)
         {
             Data del = first / second;
@@ -303,9 +392,14 @@ namespace Functions
             return res;
         }
         //Приведение
+        /// <summary>
+        /// Неявное приведение числа типа <see cref="double"/> к числу типа <see cref="Data"/>
+        /// Работает точно при относительно небольших числах
+        /// При больших числах работает с помощью бинарного поиска
+        /// </summary>
+        /// <param name="input"></param>
         public static implicit operator Data(double input)
         {
-            //следует проверить, может сломаться
             if (input < long.MaxValue)
             {
                 long l = (long)Math.Ceiling(input);
