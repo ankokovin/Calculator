@@ -181,11 +181,26 @@ namespace Functions
         }
         public static Data operator /(Data first, Data second)
         {
-            Data result = new Data();
-            result.Plus= !(first.Plus ^ second.Plus);
-            if (first < second) return result;
-
-            throw new NotImplementedException();
+            Data right = first.Copy();
+            Data left = new Data();
+            left.Plus= !(first.Plus ^ second.Plus);
+            right.Plus = left.Plus;
+            if (first < second) return left;
+            Data eps = new Data("1");
+            while (left - right < eps)
+            {
+                Data mid = (left + right) / 2;
+                if (mid*second<first)
+                {
+                    left = mid;
+                } else
+                {
+                    right = mid;
+                }
+            }
+            if (left == right) return left;
+            if (first - second * left < second * right - second) return left;
+            else return right;
         }
         public static Data operator / (Data input,uint div)
         {
