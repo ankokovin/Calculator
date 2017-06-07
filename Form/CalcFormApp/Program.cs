@@ -10,6 +10,7 @@ namespace CalcFormApp
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
+        /// Зафиксировать
         [STAThread]
         static void Main()
         {
