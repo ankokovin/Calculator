@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace Functions
 {
-    //Функции калькулятора
-    public class Calculator
+    class Data
     {
-
     }
-
-    
 }
