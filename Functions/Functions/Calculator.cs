@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Functions
 {
     //Функции калькулятора
-    public class Class1
+    public class Calculator
     {
     }
 }
