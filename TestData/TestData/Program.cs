@@ -12,7 +12,7 @@ namespace TestData
     class Program
     {
         static void Main(string[] args)
-        {
+        {/*
             #region Тест конструтора+Copy
 
             Data d1 = new Data();
@@ -84,7 +84,7 @@ namespace TestData
                 (new Data("9999999999999999999999998") == new Data("9999999999999999999999999")));
             Console.WriteLine("9999999999999999999999998 > 9999999999999999999999999" +
                 (new Data("9999999999999999999999998") > new Data("9999999999999999999999999")));
-            Console.WriteLine("9999999999999999999999999 < 9999999999999999999999999" +
+            Console.WriteLine("9999999999999999999999998 < 9999999999999999999999999" +
                 (new Data("9999999999999999999999998") < new Data("9999999999999999999999999")));
             Console.WriteLine("9999999999990999999999999 == 9999999999999999999999999" +
                 (new Data("9999999999990999999999999") == new Data("9999999999999999999999999")));
@@ -122,9 +122,30 @@ namespace TestData
             Console.WriteLine("-10-10=" + (new Data("-10") - new Data("10")));
 
             Console.ReadLine();
-            #endregion Тест сложения и вычитания
-            #region Тест умножения и цел. деления
-            #endregion Тест умножения и цел. деления
+            #endregion Тест сложения и вычитания*/
+            #region Тест умножения 
+            Console.Clear();
+
+            //Console.WriteLine("0*0=" + (new Data() * new Data()));
+            //Console.WriteLine("1000000*0=" + (new Data("1000000") * new Data()));
+            //Console.WriteLine("0*1000000=" + (new Data() * new Data("1000000")));
+            //Console.WriteLine("1000000*1=" + (new Data("1000000") * new Data("1")));
+            //Console.WriteLine("1*1000000=" + (new Data("1") * new Data("1000000")));
+            //Console.WriteLine("1000*1000=" + (new Data("1000") * new Data("1000")));
+            //Console.WriteLine("10000001*10000001=" + (new Data("10000001") * new Data("10000001")));
+            //Console.WriteLine("-1*1000=" + (new Data("-1") * new Data("1000")));
+            //Console.WriteLine("1000*(-1)=" + (new Data("1000") * new Data("-1")));
+            Console.WriteLine("1234567890*987654321=" + (new Data("1234567890") * new Data("987654321")) + " "
+                + ((new Data("1234567890") * new Data("987654321")) == new Data("1219326311126352690")));
+            Console.WriteLine("-1234567890*987654321=" + (new Data("-1234567890") * new Data("987654321")) + " "
+               + ((new Data("-1234567890") * new Data("987654321")) == new Data("-1219326311126352690")));
+            Console.WriteLine("-1234567890*(-987654321)=" + (new Data("-1234567890") * new Data("-987654321")) + " "
+               + ((new Data("-1234567890") * new Data("-987654321")) == new Data("1219326311126352690")));
+
+            Console.ReadLine();
+            #endregion Тест умножения 
+            #region Тест цел. деления
+            #endregion Тест цел. деления
             #region Тест деления и приведения
             #endregion Тест деления и приведения
         }

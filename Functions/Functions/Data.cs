@@ -12,16 +12,23 @@ namespace Functions
 {
     public class Data
     {
-        int Count;
+        int Count
+        {
+            get
+            { for (int i = N - 1; i > 0; i--)
+                    if (Digits[i] != 0) return i + 1;
+                return 1;
+            }
+        }
         const int N = 5;
-        int[] Digits = new int[N];
+        long[] Digits = new long[N];
         bool Plus = true;
         const int Base = 100000;
-        public Data()
+        public Data() //инициализируется число 0
         {
-            Count = 1;
+            
         }
-        public Data(string Input)
+        public Data(string Input) //инициализируется длинное число по строке
         {
             if (Input.Length > 26) throw new Exception("Слишком большая строка");
             Regex check = new Regex("^-?[0-9]+$");
@@ -32,15 +39,16 @@ namespace Functions
                 Input=Input.Remove(0, 1);
             }
             if (Input.Length > 25) throw new Exception("Слишком большая строка");
+            int count = 0;
             while (Input.Length>5)
             {
-                Digits[Count] = int.Parse(Input.Substring(Input.Length - 5));
-                Count++;
+                Digits[count] = int.Parse(Input.Substring(Input.Length - 5));
+                count++;
                 Input=Input.Remove(Input.Length - 5);
             }
-            Digits[Count]= int.Parse(Input);
-            Count++;
+            Digits[count]= int.Parse(Input);
         }
+        #region Операторы сравнения
         public static bool operator < (Data first, Data second)
         {
             if (first.Plus != second.Plus)
@@ -74,10 +82,10 @@ namespace Functions
         {
             return !(first == second);
         }
+#endregion Операторы сравнения
         public Data Copy()
         {
             Data result = new Data();
-            result.Count = Count;
             for (int i = 0; i < Digits.Length; i++) result.Digits[i] = Digits[i];
             result.Plus = Plus;
             return result;
@@ -113,22 +121,32 @@ namespace Functions
             {
                 Data result = new Data();
                 result.Plus = first.Plus;
-                int reminder=0;
+                long reminder=0;
                 for (int i = 0; i < Math.Max(first.Count, second.Count); i++)
                 {
                     result.Digits[i] = first.Digits[i] + second.Digits[i]+reminder;
                     reminder = result.Digits[i] / Base;
                     result.Digits[i] %= Base;
                 }
-                result.Count = Math.Max(first.Count, second.Count);
                 if (reminder != 0)
                 {
                     if (result.Count == N) throw new Exception("Результат вышел за пределы 25 знаков.");
                     result.Digits[result.Count] = reminder;
-                    result.Count++;
                 }
                 return result;
             }
+        }
+        public static Data operator ++(Data input)
+        {
+            int i = 0;
+            input.Digits[i]++;
+            while (input.Digits[i] == Base)
+            {
+                input.Digits[i] = 0;
+                i++;
+                input.Digits[i]++;
+            }
+            return input;
         }
         //Унарный минус
         public static Data operator -(Data input)
@@ -172,24 +190,23 @@ namespace Functions
             for (int i = 0; i < second.Count; i++)
             {
                 Data tempRes = new Data();
-                int reminder = 0;
+                long reminder = 0;
                 for (int j = 0; j < first.Count;j++)
                 {
                     tempRes.Digits[i + j] = first.Digits[j] * second.Digits[i]+reminder;
                     reminder = tempRes.Digits[i + j] / Base;
                     tempRes.Digits[i + j] %= Base;
                 }
-                tempRes.Count = i + first.Count;
                 if (reminder > 0)
                 {
                     tempRes.Digits[tempRes.Count] = reminder;
-                    tempRes.Count++;
                 }
                 result = result + tempRes;
             }
             result.Plus = !(first.Plus ^ second.Plus);
             return result;
         }
+        //Целочисленное деление длинных
         public static Data operator /(Data first, Data second)
         {
             Data right = first.Copy();
@@ -213,39 +230,29 @@ namespace Functions
             if (first - second * left < second * right - second) return left;
             else return right;
         }
+        //Целочисленное деление на короткое число
         public static Data operator / (Data input,int div)
         {
             if (div >= Base) throw new Exception("Делитель - слишком длинное число.");
             Data result = input.Copy();
-            int reminder = 0;
+            long reminder = 0;
             for (int i=input.Count-1;i>=0;i++)
             {
                 result.Digits[i] += reminder * Base;
                 reminder = result.Digits[i] % div;
                 result.Digits[i] /= div;
             }
-            while (result.Digits[result.Count - 1] == 0) result.Count--;
             if ((double)reminder / div > 0.5) result++;
                 return result;
         }
-        public static double operator / (int first, Data second)
+        //Деление короткого на длинное
+        public static double operator / (long first, Data second)
         {
             double div = 0;
             for (int i = 0; i < second.Count; i++) div += second.Digits[i] * Math.Pow(Base, i);
             return first / div;
         }
-        public static Data operator ++(Data input)
-        {
-            int i = 0;
-            input.Digits[i]++;
-            while (input.Digits[i]==Base)
-            {
-                input.Digits[i] = 0;
-                i++;
-                input.Digits[i]++;
-            }
-            return input;
-        }
+        //Деление длинных
         public static double Divide (Data first, Data second)
         {
             double result = 0;
@@ -255,12 +262,7 @@ namespace Functions
             }
             return result;
         }
-        public static implicit operator Data(double input)
-        {
-            //следует проверить, может сломаться
-            long l = (long)Math.Ceiling(input);
-            return new Data(l.ToString());
-        }
+        //Остаток от деления
         public static Data operator %(Data first, Data second)
         {
             Data del = first / second;
@@ -272,6 +274,13 @@ namespace Functions
             Data res = f-s*del;
             if (!res.Plus) res += s;
             return res;
+        }
+        //Приведение
+        public static implicit operator Data(double input)
+        {
+            //следует проверить, может сломаться
+            long l = (long)Math.Ceiling(input);
+            return new Data(l.ToString());
         }
         public override string ToString()
         {
@@ -288,6 +297,21 @@ namespace Functions
                 result += Digits[i].ToString();
             }
             return result;
+        }
+        public override bool Equals(object obj)
+        {
+            if (obj is Data)
+            {
+                Data d = obj as Data;
+                return this == d;
+            }
+            return false;
+        }
+        public override int GetHashCode()
+        {
+            long Hash = 0;
+            for (int i = 0; i < Digits.Length; i++) Hash += Digits[i].GetHashCode();
+            return (int)Hash;
         }
     }
 }
