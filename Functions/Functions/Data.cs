@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Functions
 {
-    class Data
+    public class Data
     {
         int Count;
         const int N = 5;
@@ -36,6 +36,14 @@ namespace Functions
         {
             throw new NotImplementedException();
         }
+        /*          Сложение
+         *  Возможные случаи:
+         *      1) Одинаковые знаки -> Выполняется обычное сложение, знак результата = знак входных чисел
+         *      2) Разные знаки -> Следует привести к вычитанию 
+         *          a+b = a-(-b) = b-(-a)
+         *          Наименьший следует использовать в качестве вычитаемого!
+         * 
+         */ 
         public static Data operator + (Data first, Data second)
         {
             if (first.Plus != second.Plus)//если числа разных знаков, то следует юзать разность
@@ -78,8 +86,28 @@ namespace Functions
 
             throw new NotImplementedException();
         }
+        //Унарный минус
+        public static Data operator -(Data input)
+        {
+            Data result = input.Copy();
+            result.Plus = !input.Plus;
+            return result;
+        }
+        /*          Вычитание
+         * Возможные случаи:
+         *          1) Одинаковые знаки
+         *              а)  first>=second - нормальное вычитание
+         *              б) first<second - замена на -(second-first)
+         *          2) Разные знаки -> Свести к сложению
+         *               a-b=a+(-b)
+         */
         public static Data operator -(Data first, Data second)
         {
+            if (first.Plus == second.Plus)
+            {
+                return first + (-second);
+            }
+            if (first < second) return -(second - first);
             throw new NotImplementedException();
         }
         public static Data operator *(Data first, Data second)
