@@ -20,7 +20,7 @@ namespace Functions
         const uint Base = 100000;
         public Data()
         {
-
+            Count = 1;
         }
         public Data(string Input)
         {
@@ -44,12 +44,10 @@ namespace Functions
                 if (first.Digits[i] > second.Digits[i]) return false;
             }
             return false;
-            throw new NotImplementedException();
         }
         public static bool operator >(Data first, Data second)
         {
             return !(first < second) && !(first == second);
-            throw new NotImplementedException();
         }
         public static bool operator == (Data first, Data second)
         {
@@ -115,8 +113,6 @@ namespace Functions
                 }
                 return result;
             }
-
-            throw new NotImplementedException();
         }
         //Унарный минус
         public static Data operator -(Data input)
@@ -152,7 +148,6 @@ namespace Functions
                 }
             }
             return result;
-            throw new NotImplementedException();
         }
         public static Data operator *(Data first, Data second)
         {
@@ -167,7 +162,7 @@ namespace Functions
             throw new NotImplementedException();
         }
        
-        public static double operator %(Data first, Data second)
+        public static Data operator %(Data first, Data second)
         {
             throw new NotImplementedException();
         }
@@ -186,8 +181,6 @@ namespace Functions
                 result += Digits[i].ToString();
             }
             return result;
-            throw new NotImplementedException();
-            return base.ToString();
         }
     }
 }
