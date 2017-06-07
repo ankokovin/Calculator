@@ -177,7 +177,6 @@ namespace Functions
             }
             result.Plus = !(first.Plus ^ second.Plus);
             return result;
-            throw new NotImplementedException();
         }
         public static Data operator /(Data first, Data second)
         {
@@ -243,7 +242,6 @@ namespace Functions
                 result += first.Digits[i] / second;
             }
             return result;
-            throw new NotImplementedException();
         }
         public static implicit operator Data(double input)
         {
@@ -253,7 +251,15 @@ namespace Functions
         }
         public static Data operator %(Data first, Data second)
         {
-            throw new NotImplementedException();
+            Data del = first / second;
+            del.Plus = true;
+            Data f = first.Copy();
+            f.Plus = true;
+            Data s = second.Copy();
+            s.Plus = true;
+            Data res = f-s*del;
+            if (!res.Plus) res += s;
+            return res;
         }
         public override string ToString()
         {
