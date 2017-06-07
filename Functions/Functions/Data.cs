@@ -245,7 +245,12 @@ namespace Functions
             return result;
             throw new NotImplementedException();
         }
-       
+        public static implicit operator Data(double input)
+        {
+            //следует проверить, может сломаться
+            long l = (long)Math.Ceiling(input);
+            return new Data(l.ToString());
+        }
         public static Data operator %(Data first, Data second)
         {
             throw new NotImplementedException();
