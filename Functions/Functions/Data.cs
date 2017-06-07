@@ -175,12 +175,44 @@ namespace Functions
                 }
                 result = result + tempRes;
             }
+            result.Plus = !(first.Plus ^ second.Plus);
             return result;
             throw new NotImplementedException();
         }
         public static Data operator /(Data first, Data second)
         {
+            Data result = new Data();
+            result.Plus= !(first.Plus ^ second.Plus);
+            if (first < second) return result;
+
             throw new NotImplementedException();
+        }
+        public static Data operator / (Data input,uint div)
+        {
+            if (div >= Base) throw new Exception("Делитель - слишком длинное число.");
+            Data result = input.Copy();
+            uint reminder = 0;
+            for (int i=input.Count-1;i>=0;i++)
+            {
+                result.Digits[i] += reminder * Base;
+                reminder = result.Digits[i] % div;
+                result.Digits[i] /= div;
+            }
+            while (result.Digits[result.Count - 1] == 0) result.Count--;
+            if ((double)reminder / div > 0.5) result++;
+                return result;
+        }
+        public static Data operator ++(Data input)
+        {
+            int i = 0;
+            input.Digits[i]++;
+            while (input.Digits[i]==Base)
+            {
+                input.Digits[i] = 0;
+                i++;
+                input.Digits[i]++;
+            }
+            return input;
         }
         public static double Divide (Data first, Data second)
         {
