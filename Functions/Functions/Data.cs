@@ -101,6 +101,19 @@ namespace Functions
         }
         public override string ToString()
         {
+            string result=Digits[Count-1].ToString();
+            if (!Plus) result = '-' + result;
+            for (int i = Count - 2; i >= 0; i++)
+            {
+                uint tempBase = Base/10;
+                while (Digits[i] / tempBase == 0 && tempBase>1)
+                {
+                    result += '0';
+                    tempBase /= 10;
+                }
+                result += Digits[i].ToString();
+            }
+            return result;
             throw new NotImplementedException();
             return base.ToString();
         }
