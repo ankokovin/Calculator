@@ -12,7 +12,7 @@ namespace TestData
     class Program
     {
         static void Main(string[] args)
-        {/*
+        {
             #region Тест конструтора+Copy
 
             Data d1 = new Data();
@@ -122,19 +122,19 @@ namespace TestData
             Console.WriteLine("-10-10=" + (new Data("-10") - new Data("10")));
 
             Console.ReadLine();
-            #endregion Тест сложения и вычитания*/
+            #endregion Тест сложения и вычитания
             #region Тест умножения 
             Console.Clear();
 
-            //Console.WriteLine("0*0=" + (new Data() * new Data()));
-            //Console.WriteLine("1000000*0=" + (new Data("1000000") * new Data()));
-            //Console.WriteLine("0*1000000=" + (new Data() * new Data("1000000")));
-            //Console.WriteLine("1000000*1=" + (new Data("1000000") * new Data("1")));
-            //Console.WriteLine("1*1000000=" + (new Data("1") * new Data("1000000")));
-            //Console.WriteLine("1000*1000=" + (new Data("1000") * new Data("1000")));
-            //Console.WriteLine("10000001*10000001=" + (new Data("10000001") * new Data("10000001")));
-            //Console.WriteLine("-1*1000=" + (new Data("-1") * new Data("1000")));
-            //Console.WriteLine("1000*(-1)=" + (new Data("1000") * new Data("-1")));
+            Console.WriteLine("0*0=" + (new Data() * new Data()));
+            Console.WriteLine("1000000*0=" + (new Data("1000000") * new Data()));
+            Console.WriteLine("0*1000000=" + (new Data() * new Data("1000000")));
+            Console.WriteLine("1000000*1=" + (new Data("1000000") * new Data("1")));
+            Console.WriteLine("1*1000000=" + (new Data("1") * new Data("1000000")));
+            Console.WriteLine("1000*1000=" + (new Data("1000") * new Data("1000")));
+            Console.WriteLine("10000001*10000001=" + (new Data("10000001") * new Data("10000001")));
+            Console.WriteLine("-1*1000=" + (new Data("-1") * new Data("1000")));
+            Console.WriteLine("1000*(-1)=" + (new Data("1000") * new Data("-1")));
             Console.WriteLine("1234567890*987654321=" + (new Data("1234567890") * new Data("987654321")) + " "
                 + ((new Data("1234567890") * new Data("987654321")) == new Data("1219326311126352690")));
             Console.WriteLine("-1234567890*987654321=" + (new Data("-1234567890") * new Data("987654321")) + " "
