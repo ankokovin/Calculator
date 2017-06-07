@@ -5,9 +5,8 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 /*
- * Написанные операции: + -
- * Написать: * / /цел %
- */ 
+ * Написанные операции: + -  * / /цел %
+ */
 
 namespace Functions
 {
@@ -15,9 +14,9 @@ namespace Functions
     {
         int Count;
         const int N = 5;
-        uint[] Digits = new uint[N];
+        int[] Digits = new int[N];
         bool Plus = true;
-        const uint Base = 100000;
+        const int Base = 100000;
         public Data()
         {
             Count = 1;
@@ -35,11 +34,11 @@ namespace Functions
             if (Input.Length > 25) throw new Exception("Слишком большая строка");
             while (Input.Length>5)
             {
-                Digits[Count] = uint.Parse(Input.Substring(Input.Length - 5));
+                Digits[Count] = int.Parse(Input.Substring(Input.Length - 5));
                 Count++;
                 Input=Input.Remove(Input.Length - 5);
             }
-            Digits[Count]= uint.Parse(Input);
+            Digits[Count]= int.Parse(Input);
             Count++;
         }
         public static bool operator < (Data first, Data second)
@@ -51,7 +50,7 @@ namespace Functions
             }
             if (first.Count > second.Count) return false;
             if (second.Count > first.Count) return true;
-            for (int i = first.Count - 1; i >= 0; i++)
+            for (int i = first.Count - 1; i >= 0; i--)
             {
                 if (first.Digits[i] < second.Digits[i]) return true;
                 if (first.Digits[i] > second.Digits[i]) return false;
@@ -114,7 +113,7 @@ namespace Functions
             {
                 Data result = new Data();
                 result.Plus = first.Plus;
-                uint reminder=0;
+                int reminder=0;
                 for (int i = 0; i < Math.Max(first.Count, second.Count); i++)
                 {
                     result.Digits[i] = first.Digits[i] + second.Digits[i]+reminder;
@@ -153,9 +152,9 @@ namespace Functions
                 return first + (-second);
             }
             if (first < second) return -(second - first);
-            uint reminder = 0;
+            int reminder = 0;
             Data result = first.Copy();
-            for (int i = first.Count - 1; i <= 0; i++)
+            for (int i = 0; i < first.Count; i++)
             {
                 result.Digits[i] = result.Digits[i] - second.Digits[i] - reminder;
                 if (result.Digits[i] < 0)
@@ -173,7 +172,7 @@ namespace Functions
             for (int i = 0; i < second.Count; i++)
             {
                 Data tempRes = new Data();
-                uint reminder = 0;
+                int reminder = 0;
                 for (int j = 0; j < first.Count;j++)
                 {
                     tempRes.Digits[i + j] = first.Digits[j] * second.Digits[i]+reminder;
@@ -214,11 +213,11 @@ namespace Functions
             if (first - second * left < second * right - second) return left;
             else return right;
         }
-        public static Data operator / (Data input,uint div)
+        public static Data operator / (Data input,int div)
         {
             if (div >= Base) throw new Exception("Делитель - слишком длинное число.");
             Data result = input.Copy();
-            uint reminder = 0;
+            int reminder = 0;
             for (int i=input.Count-1;i>=0;i++)
             {
                 result.Digits[i] += reminder * Base;
@@ -229,7 +228,7 @@ namespace Functions
             if ((double)reminder / div > 0.5) result++;
                 return result;
         }
-        public static double operator / (uint first, Data second)
+        public static double operator / (int first, Data second)
         {
             double div = 0;
             for (int i = 0; i < second.Count; i++) div += second.Digits[i] * Math.Pow(Base, i);
@@ -280,7 +279,7 @@ namespace Functions
             if (!Plus) result = '-' + result;
             for (int i = Count - 2; i >= 0; i--)
             {
-                uint tempBase = Base/10;
+                int tempBase = Base/10;
                 while (Digits[i] / tempBase == 0 && tempBase>1)
                 {
                     result += '0';
