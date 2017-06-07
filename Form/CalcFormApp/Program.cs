@@ -10,12 +10,13 @@ namespace CalcFormApp
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
+        /// Зафиксировать
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new MenuForm());
         }
     }
 }
