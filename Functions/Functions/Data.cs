@@ -86,13 +86,28 @@ namespace Functions
 
             throw new NotImplementedException();
         }
+        //Унарный минус
+        public static Data operator -(Data input)
+        {
+            Data result = input.Copy();
+            result.Plus = !input.Plus;
+            return result;
+        }
         /*          Вычитание
          * Возможные случаи:
-         *  
+         *          1) Одинаковые знаки
+         *              а)  first>=second - нормальное вычитание
+         *              б) first<second - замена на -(second-first)
+         *          2) Разные знаки -> Свести к сложению
+         *               a-b=a+(-b)
          */
         public static Data operator -(Data first, Data second)
         {
-
+            if (first.Plus == second.Plus)
+            {
+                return first + (-second);
+            }
+            if (first < second) return -(second - first);
             throw new NotImplementedException();
         }
         public static Data operator *(Data first, Data second)
