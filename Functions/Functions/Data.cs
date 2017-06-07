@@ -155,6 +155,22 @@ namespace Functions
         }
         public static Data operator *(Data first, Data second)
         {
+            if (first.Count + second.Count - 1 > N) throw new Exception("Результат вышел за пределы 25 знаков");
+            Data result = new Data();
+            for (int i = 0; i < second.Count; i++)
+            {
+                Data tempRes = new Data();
+                uint reminder = 0;
+                for (int j = 0; j < first.Count;j++)
+                {
+                    tempRes.Digits[i + j] = first.Digits[j] * second.Digits[i]+reminder;
+                    reminder = tempRes.Digits[i + j] / Base;
+                    tempRes.Digits[i + j] %= Base;
+                }
+                tempRes.Count = i + first.Count;
+                result = result + tempRes;
+            }
+            return result;
             throw new NotImplementedException();
         }
         public static Data operator /(Data first, Data second)
