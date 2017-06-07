@@ -217,6 +217,12 @@ namespace Functions
             if ((double)reminder / div > 0.5) result++;
                 return result;
         }
+        public static double operator / (uint first, Data second)
+        {
+            double div = 0;
+            for (int i = 0; i < second.Count; i++) div += second.Digits[i] * Math.Pow(Base, i);
+            return first / div;
+        }
         public static Data operator ++(Data input)
         {
             int i = 0;
@@ -231,6 +237,12 @@ namespace Functions
         }
         public static double Divide (Data first, Data second)
         {
+            double result = 0;
+            for (int i = 0; i < first.Count; i++)
+            {
+                result += first.Digits[i] / second;
+            }
+            return result;
             throw new NotImplementedException();
         }
        
