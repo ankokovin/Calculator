@@ -168,6 +168,11 @@ namespace Functions
                     tempRes.Digits[i + j] %= Base;
                 }
                 tempRes.Count = i + first.Count;
+                if (reminder > 0)
+                {
+                    tempRes.Digits[tempRes.Count] = reminder;
+                    tempRes.Count++;
+                }
                 result = result + tempRes;
             }
             return result;
