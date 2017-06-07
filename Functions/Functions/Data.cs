@@ -64,7 +64,11 @@ namespace Functions
         }
         public Data Copy()
         {
-            throw new NotImplementedException();
+            Data result = new Data();
+            result.Count = Count;
+            for (int i = 0; i < Digits.Length; i++) result.Digits[i] = Digits[i];
+            result.Plus = Plus;
+            return result;
         }
         /*          Сложение
          *  Возможные случаи:
