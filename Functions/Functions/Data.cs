@@ -30,14 +30,14 @@ namespace Functions
             if (Input[0] == '-')
             {
                 Plus = false;
-                Input.Remove(0, 1);
+                Input=Input.Remove(0, 1);
             }
             if (Input.Length > 25) throw new Exception("Слишком большая строка");
             while (Input.Length>5)
             {
                 Digits[Count] = uint.Parse(Input.Substring(Input.Length - 5));
                 Count++;
-                Input.Remove(Input.Length - 5);
+                Input=Input.Remove(Input.Length - 5);
             }
             Digits[Count]= uint.Parse(Input);
             Count++;
@@ -278,7 +278,7 @@ namespace Functions
         {
             string result=Digits[Count-1].ToString();
             if (!Plus) result = '-' + result;
-            for (int i = Count - 2; i >= 0; i++)
+            for (int i = Count - 2; i >= 0; i--)
             {
                 uint tempBase = Base/10;
                 while (Digits[i] / tempBase == 0 && tempBase>1)
