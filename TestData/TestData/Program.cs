@@ -13,6 +13,7 @@ namespace TestData
     {
         static void Main(string[] args)
         {
+            /*
             #region Тест конструтора+Copy
 
             Data d1 = new Data();
@@ -143,10 +144,31 @@ namespace TestData
                + ((new Data("-1234567890") * new Data("-987654321")) == new Data("1219326311126352690")));
 
             Console.ReadLine();
-            #endregion Тест умножения 
+            #endregion Тест умножения */
             #region Тест цел. деления
+            Console.Clear();
+            try
+            {
+                Console.WriteLine("1/0=" + (new Data("1") / new Data()));
+            } 
+            catch (Exception e) { Console.WriteLine(e.Message); }
+            Console.WriteLine("0/1=" + (new Data() / new Data("1")));
+            Console.WriteLine("0/(-1)=" + (new Data() / new Data("-1")));
+            Console.WriteLine("12/33=" + (new Data("12") / new Data("33")));
+            Console.WriteLine("-12/33=" + (new Data("-12") / new Data("33")));
+            Console.WriteLine("12/(-33)=" + (new Data("12") / new Data("-33")));
+            Console.WriteLine("-12/(-33)=" + (new Data("-12") / new Data("-33")));
+            Console.WriteLine("-121/11=" + (new Data("-121") / new Data("11")));
+            Console.WriteLine("121/(-11)=" + (new Data("121") / new Data("-11")));
+            Console.WriteLine("9999999999/9999999999=" + (new Data("9999999999") / new Data("9999999999")));
+            Console.WriteLine("9999999999/9999999998=" + (new Data("9999999999") / new Data("9999999998")));
+            Console.WriteLine("9876543210/1234567890=" + (new Data("9876543210") / new Data("1234567890")));
+            Console.ReadLine();
             #endregion Тест цел. деления
             #region Тест деления и приведения
+            Console.Clear();
+
+            Console.ReadLine();
             #endregion Тест деления и приведения
         }
     }

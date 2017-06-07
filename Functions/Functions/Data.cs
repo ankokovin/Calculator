@@ -206,16 +206,24 @@ namespace Functions
             result.Plus = !(first.Plus ^ second.Plus);
             return result;
         }
+        public static Data Abs(Data input)
+        {
+            Data result = input.Copy();
+            result.Plus = true;
+            return result;
+        }
         //Целочисленное деление длинных
         public static Data operator /(Data first, Data second)
         {
+            if (second == new Data()) throw new Exception("Деление на 0");
             Data right = first.Copy();
             Data left = new Data();
             left.Plus= !(first.Plus ^ second.Plus);
             right.Plus = left.Plus;
-            if (first < second) return left;
+            if (first == new Data()) return left;
+            if (Abs(first)<Abs(second)) return left;
             Data eps = new Data("1");
-            while (left - right < eps)
+            while (Abs(right-left) > eps)
             {
                 Data mid = (left + right) / 2;
                 if (mid*second<first)
@@ -236,7 +244,7 @@ namespace Functions
             if (div >= Base) throw new Exception("Делитель - слишком длинное число.");
             Data result = input.Copy();
             long reminder = 0;
-            for (int i=input.Count-1;i>=0;i++)
+            for (int i=input.Count-1;i>=0;i--)
             {
                 result.Digits[i] += reminder * Base;
                 reminder = result.Digits[i] % div;
