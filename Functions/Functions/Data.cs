@@ -4,6 +4,11 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
+/*
+ * Написанные операции: + -
+ * Написать: * / /цел %
+ */ 
+
 namespace Functions
 {
     public class Data
@@ -26,11 +31,38 @@ namespace Functions
         }
         public static bool operator < (Data first, Data second)
         {
+            if (first.Plus != second.Plus)
+            {
+                if (first.Plus) return false;
+                else return true;
+            }
+            if (first.Count > second.Count) return false;
+            if (second.Count > first.Count) return true;
+            for (int i = first.Count - 1; i >= 0; i++)
+            {
+                if (first.Digits[i] < second.Digits[i]) return true;
+                if (first.Digits[i] > second.Digits[i]) return false;
+            }
+            return false;
             throw new NotImplementedException();
         }
         public static bool operator >(Data first, Data second)
         {
+            return !(first < second) && !(first == second);
             throw new NotImplementedException();
+        }
+        public static bool operator == (Data first, Data second)
+        {
+            if (first.Plus != second.Plus || first.Count != second.Count)
+            {
+                return false;
+            }
+            for (int i = 0; i < first.Count; i++) if (first.Digits[i] != second.Digits[i]) return false;
+            return true;
+        }
+        public static bool operator != (Data first, Data second)
+        {
+            return !(first == second);
         }
         public Data Copy()
         {
@@ -103,11 +135,23 @@ namespace Functions
          */
         public static Data operator -(Data first, Data second)
         {
-            if (first.Plus == second.Plus)
+            if (first.Plus != second.Plus)
             {
                 return first + (-second);
             }
             if (first < second) return -(second - first);
+            uint reminder = 0;
+            Data result = first.Copy();
+            for (int i = first.Count - 1; i <= 0; i++)
+            {
+                result.Digits[i] = result.Digits[i] - second.Digits[i] - reminder;
+                if (result.Digits[i] < 0)
+                {
+                    reminder = 1;
+                    result.Digits[i] += Base;
+                }
+            }
+            return result;
             throw new NotImplementedException();
         }
         public static Data operator *(Data first, Data second)
