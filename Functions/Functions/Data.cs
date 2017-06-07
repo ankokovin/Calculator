@@ -136,31 +136,29 @@ namespace Functions
                 Data result = new Data();
                 result.Plus = first.Plus;
                 long reminder=0;
+                int count=0;
                 for (int i = 0; i < Math.Max(first.Count, second.Count); i++)
                 {
                     result.Digits[i] = first.Digits[i] + second.Digits[i]+reminder;
                     reminder = result.Digits[i] / Base;
                     result.Digits[i] %= Base;
+                    count++;
                 }
                 if (reminder != 0)
                 {
-                    if (result.Count == N) throw new Exception("Результат вышел за пределы 25 знаков.");
-                    result.Digits[result.Count] = reminder;
+                    if (count == N) throw new Exception("Результат вышел за пределы 25 знаков.");
+                    result.Digits[count] = reminder;
                 }
                 return result;
             }
         }
         public static Data operator ++(Data input)
         {
-            int i = 0;
-            input.Digits[i]++;
-            while (input.Digits[i] == Base)
-            {
-                input.Digits[i] = 0;
-                i++;
-                input.Digits[i]++;
-            }
-            return input;
+            return input + One;
+        }
+        public static Data operator --(Data input)
+        {
+            return input - One;
         }
         //Унарный минус
         public static Data operator -(Data input)
@@ -197,28 +195,33 @@ namespace Functions
             }
             return result;
         }
+        //Умножение - обычное, столбиком
         public static Data operator *(Data first, Data second)
         {
             if (first.Count + second.Count - 1 > N) throw new Exception("Результат вышел за пределы 25 знаков");
-            Data result = new Data();
-            for (int i = 0; i < second.Count; i++)
+            try
             {
-                Data tempRes = new Data();
-                long reminder = 0;
-                for (int j = 0; j < first.Count;j++)
+                Data result = new Data();
+                for (int i = 0; i < second.Count; i++)
                 {
-                    tempRes.Digits[i + j] = first.Digits[j] * second.Digits[i]+reminder;
-                    reminder = tempRes.Digits[i + j] / Base;
-                    tempRes.Digits[i + j] %= Base;
+                    Data tempRes = new Data();
+                    long reminder = 0;
+                    for (int j = 0; j < first.Count; j++)
+                    {
+                        tempRes.Digits[i + j] = first.Digits[j] * second.Digits[i] + reminder;
+                        reminder = tempRes.Digits[i + j] / Base;
+                        tempRes.Digits[i + j] %= Base;
+                    }
+                    if (reminder > 0)
+                    {
+                        tempRes.Digits[tempRes.Count] = reminder;
+                    }
+                    result = result + tempRes;
                 }
-                if (reminder > 0)
-                {
-                    tempRes.Digits[tempRes.Count] = reminder;
-                }
-                result = result + tempRes;
-            }
-            result.Plus = !(first.Plus ^ second.Plus);
-            return result;
+                result.Plus = !(first.Plus ^ second.Plus);
+                return result;
+            } 
+            catch (IndexOutOfRangeException) { throw new Exception("Результат вышел за пределы 25 знаков"); }
         }
         public static Data Abs(Data input)
         {
