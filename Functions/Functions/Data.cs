@@ -8,10 +8,15 @@ namespace Functions
 {
     class Data
     {
+        int Count;
         const int N = 5;
         uint[] Digits = new uint[N];
         bool Plus = true;
         const uint Base = 100000;
+        public Data()
+        {
+
+        }
         public Data(string Input)
         {
             if (Input.Length > 26) throw new Exception("Слишком большая строка");
@@ -33,7 +38,7 @@ namespace Functions
         }
         public static Data operator + (Data first, Data second)
         {
-            if (first.Plus != second.Plus)
+            if (first.Plus != second.Plus)//если числа разных знаков, то следует юзать разность
             {
                 Data f;
                 Data s;
@@ -50,7 +55,27 @@ namespace Functions
                 }
                 s.Plus = !s.Plus;
                 return f - s;
+            } else
+            {
+                Data result = new Data();
+                result.Plus = first.Plus;
+                uint reminder=0;
+                for (int i = 0; i < Math.Max(first.Count, second.Count); i++)
+                {
+                    result.Digits[i] = first.Digits[i] + second.Digits[i]+reminder;
+                    reminder = result.Digits[i] / Base;
+                    result.Digits[i] %= Base;
+                }
+                result.Count = Math.Max(first.Count, second.Count);
+                if (reminder != 0)
+                {
+                    if (result.Count == N) throw new Exception("Результат вышел за пределы 25 знаков.");
+                    result.Digits[result.Count] = reminder;
+                    result.Count++;
+                }
+                return result;
             }
+
             throw new NotImplementedException();
         }
         public static Data operator -(Data first, Data second)
