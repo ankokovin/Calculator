@@ -144,7 +144,7 @@ namespace TestData
                + ((new Data("-1234567890") * new Data("-987654321")) == new Data("1219326311126352690")));
 
             Console.ReadLine();
-            #endregion Тест умножения */
+            #endregion Тест умножения 
             #region Тест цел. деления
             Console.Clear();
             try
@@ -164,10 +164,38 @@ namespace TestData
             Console.WriteLine("9999999999/9999999998=" + (new Data("9999999999") / new Data("9999999998")));
             Console.WriteLine("9876543210/1234567890=" + (new Data("9876543210") / new Data("1234567890")));
             Console.ReadLine();
-            #endregion Тест цел. деления
+            #endregion Тест цел. деления*/
             #region Тест деления и приведения
             Console.Clear();
 
+            try { Console.WriteLine("1/0=" + Data.Divide(new Data("1"), new Data())); }
+            catch(Exception e) { Console.WriteLine(e.Message); }
+            Console.WriteLine("0/1=" + Data.Divide(new Data(), new Data("1")));
+            Console.WriteLine("9999999999/9999999999=" + Data.Divide(new Data("9999999999"), new Data("9999999999")));
+            Console.WriteLine("9999999999/9999999998=" + Data.Divide(new Data("9999999999"), new Data("9999999998")));
+            Console.WriteLine("9876543210/1234567890=" + Data.Divide(new Data("9876543210"), new Data("1234567890")));
+            Console.WriteLine("12/33=" + Data.Divide(new Data("12"), new Data("33")));
+            Console.WriteLine("-12/33=" + Data.Divide(new Data("-12"), new Data("33")));
+            Console.WriteLine("12/(-33)=" + Data.Divide(new Data("12"),new Data("-33")));
+            Console.WriteLine("-12/(-33)=" + Data.Divide(new Data("-12"), new Data("-33")));
+            Console.WriteLine("-121/11=" + Data.Divide(new Data("-121"), new Data("11")));
+            Console.WriteLine("121/(-11)=" + Data.Divide(new Data("121"), new Data("-11")));
+            Data priv1 = Data.Divide(new Data("9999999999"), new Data("9999999998"));
+            Console.WriteLine("(Data)9999999999/9999999998=" + priv1);
+            Data priv2 = Data.Divide(new Data("9876543210"), new Data("1234567890"));
+            Console.WriteLine("(Data)9876543210/1234567890=" + priv2);
+            Data priv3 = Data.Divide(new Data("-12"), new Data("33"));
+            Console.WriteLine("(Data)(-12)/33=" + priv3);
+            Data priv4 = Data.Divide(new Data("121"), new Data("-11"));
+            Console.WriteLine("(Data) 121/(-11)=" + priv4);
+            Data priv5 = Data.Divide(new Data("1"), new Data("2"));
+            Console.WriteLine("(Data) 1/2=" + priv5);
+            Data priv6 = Data.Divide(new Data("499999"), new Data("1000000"));
+            Console.WriteLine("(Data) 499999/1000000=" + priv6);
+            Data priv7 = Data.Divide(new Data("9999999999999999999999999"), new Data("1"));
+            Console.WriteLine("(Data) 9999999999999999999999999/1=" + priv7);
+            Data priv8 = Data.Divide(new Data("999999999999999999999999"), new Data("1"));
+            Console.WriteLine("(Data) 999999999999999999999999/1=" + priv8);
             Console.ReadLine();
             #endregion Тест деления и приведения
         }

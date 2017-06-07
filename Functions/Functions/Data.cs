@@ -90,6 +90,20 @@ namespace Functions
             result.Plus = Plus;
             return result;
         }
+        public static Data MaxValue
+        {
+            get
+            {
+                return new Data("9999999999999999999999999");
+            }
+        }
+        public static Data One
+        {
+            get
+            {
+                return new Data("1");
+            }
+        }
         /*          Сложение
          *  Возможные случаи:
          *      1) Одинаковые знаки -> Выполняется обычное сложение, знак результата = знак входных чисел
@@ -263,11 +277,13 @@ namespace Functions
         //Деление длинных
         public static double Divide (Data first, Data second)
         {
+            if (second == new Data()) throw new Exception("Деление на 0");
             double result = 0;
             for (int i = 0; i < first.Count; i++)
             {
-                result += first.Digits[i] / second;
+                result += (first.Digits[i] / second)* Math.Pow(Base,i);
             }
+            if (first.Plus ^ second.Plus) result *= -1;
             return result;
         }
         //Остаток от деления
@@ -287,8 +303,25 @@ namespace Functions
         public static implicit operator Data(double input)
         {
             //следует проверить, может сломаться
-            long l = (long)Math.Ceiling(input);
-            return new Data(l.ToString());
+            if (input < long.MaxValue)
+            {
+                long l = (long)Math.Ceiling(input);
+                if (Math.Abs(l / input - 1) > Math.Abs((l - 1) / input - 1)) l--;
+                return new Data(l.ToString());
+            }
+            int maxBase = 0;
+            while (input > Math.Pow(Base, maxBase)) maxBase++;
+            if (maxBase > N) throw new Exception("Неожиданно большое число");
+            Data left = new Data();
+            Data right = MaxValue;
+            while (Abs(left-right)>One)
+            {
+                Data middle = left/2 + right/2;
+                if (Divide(middle, One) == input) return middle;
+                if (Divide(middle, One) < input) left = middle;
+                else right = middle;
+            }
+            return (left + right) / 2;
         }
         public override string ToString()
         {
