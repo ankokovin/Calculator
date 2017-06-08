@@ -100,15 +100,18 @@ namespace CalcFormApp
 
         private void PlusMinus_Click(object sender, EventArgs e)
         {
-            if (outputInfo.Text[0] == '-')
-                outputInfo.Text.Remove(0);
-            else
+            if (outputInfo.Text.Length != 0)
             {
-                char[] arr = outputInfo.Text.ToCharArray();
-                outputInfo.Text = "-";
+                if (outputInfo.Text[0] == '-')
+                    outputInfo.Text = outputInfo.Text.Remove(0, 1);
+                else
+                {
+                    char[] arr = outputInfo.Text.ToCharArray();
+                    outputInfo.Text = "-";
 
-                for (int i = 0; i < arr.Length; i++)
-                    outputInfo.Text = outputInfo.Text + arr[i];
+                    for (int i = 0; i < arr.Length; i++)
+                        outputInfo.Text = outputInfo.Text + arr[i];
+                }
             }
         }
 
@@ -153,9 +156,12 @@ namespace CalcFormApp
         private void outputInfo_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == '-')
+            {
+                e.Handled = true;
                 PlusMinus_Click(sender, e);
+            }
             else
-            if (e.KeyChar >= '0' && e.KeyChar <= '9' && (outputInfo.Text.Length < 25 || outputInfo.Text[0] == '-' && outputInfo.Text.Length < 26))
+            if (e.KeyChar >= '0' && e.KeyChar <= '9')
                 e.Handled = false;
             else
                 e.Handled = true;
@@ -166,10 +172,12 @@ namespace CalcFormApp
         {
             if (outputInfo.Text.Length != 0)
             {
-                    if (outputInfo.Text.Length > 25)
-                        outputInfo.Text = outputInfo.Text.Remove(25, 1);
+                
                 if (outputInfo.Text.Length > 26 && outputInfo.Text[0] == '-')
                     outputInfo.Text = outputInfo.Text.Remove(26, 1);
+                else
+                    if (outputInfo.Text.Length > 25 && outputInfo.Text[0] != '-')
+                    outputInfo.Text = outputInfo.Text.Remove(25, 1);
             }
         }
 
