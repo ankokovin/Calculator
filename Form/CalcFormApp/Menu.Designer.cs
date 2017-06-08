@@ -1,6 +1,6 @@
 ﻿namespace CalcFormApp
 {
-    partial class MenuForm
+    partial class Menu
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -45,13 +45,17 @@
             this.Clear = new System.Windows.Forms.Button();
             this.Previous = new System.Windows.Forms.Button();
             this.DivideFloat = new System.Windows.Forms.Button();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.outputInfo = new System.Windows.Forms.RichTextBox();
+            this.Add0 = new System.Windows.Forms.Button();
+            this.EqualsSomething = new System.Windows.Forms.Button();
+            this.PlusMinus = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Add1
             // 
+            this.Add1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Add1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            this.Add1.Location = new System.Drawing.Point(13, 72);
+            this.Add1.Location = new System.Drawing.Point(13, 54);
             this.Add1.Name = "Add1";
             this.Add1.Size = new System.Drawing.Size(45, 45);
             this.Add1.TabIndex = 0;
@@ -61,8 +65,9 @@
             // 
             // Add2
             // 
+            this.Add2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Add2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            this.Add2.Location = new System.Drawing.Point(64, 72);
+            this.Add2.Location = new System.Drawing.Point(64, 54);
             this.Add2.Name = "Add2";
             this.Add2.Size = new System.Drawing.Size(45, 45);
             this.Add2.TabIndex = 1;
@@ -72,18 +77,21 @@
             // 
             // Add3
             // 
+            this.Add3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Add3.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            this.Add3.Location = new System.Drawing.Point(115, 72);
+            this.Add3.Location = new System.Drawing.Point(115, 54);
             this.Add3.Name = "Add3";
             this.Add3.Size = new System.Drawing.Size(45, 45);
             this.Add3.TabIndex = 2;
             this.Add3.Text = "3";
             this.Add3.UseVisualStyleBackColor = true;
+            this.Add3.Click += new System.EventHandler(this.Add3_Click);
             // 
             // Add6
             // 
+            this.Add6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Add6.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            this.Add6.Location = new System.Drawing.Point(115, 123);
+            this.Add6.Location = new System.Drawing.Point(115, 105);
             this.Add6.Name = "Add6";
             this.Add6.Size = new System.Drawing.Size(45, 45);
             this.Add6.TabIndex = 5;
@@ -93,8 +101,9 @@
             // 
             // Add5
             // 
+            this.Add5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Add5.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            this.Add5.Location = new System.Drawing.Point(64, 123);
+            this.Add5.Location = new System.Drawing.Point(64, 105);
             this.Add5.Name = "Add5";
             this.Add5.Size = new System.Drawing.Size(45, 45);
             this.Add5.TabIndex = 4;
@@ -104,66 +113,71 @@
             // 
             // Add4
             // 
+            this.Add4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Add4.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            this.Add4.Location = new System.Drawing.Point(13, 123);
+            this.Add4.Location = new System.Drawing.Point(13, 105);
             this.Add4.Name = "Add4";
             this.Add4.Size = new System.Drawing.Size(45, 45);
             this.Add4.TabIndex = 3;
             this.Add4.Text = "4";
             this.Add4.UseVisualStyleBackColor = true;
-            this.Add4.Click += new System.EventHandler(this.button3_Click);
+            this.Add4.Click += new System.EventHandler(this.Add4_Click);
             // 
             // Add9
             // 
+            this.Add9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Add9.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            this.Add9.Location = new System.Drawing.Point(115, 174);
+            this.Add9.Location = new System.Drawing.Point(115, 156);
             this.Add9.Name = "Add9";
             this.Add9.Size = new System.Drawing.Size(45, 45);
             this.Add9.TabIndex = 8;
             this.Add9.Text = "9";
             this.Add9.UseVisualStyleBackColor = true;
-            this.Add9.Click += new System.EventHandler(this.button1_Click);
+            this.Add9.Click += new System.EventHandler(this.Add9_Click);
             // 
             // Add8
             // 
+            this.Add8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Add8.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            this.Add8.Location = new System.Drawing.Point(64, 174);
+            this.Add8.Location = new System.Drawing.Point(64, 156);
             this.Add8.Name = "Add8";
             this.Add8.Size = new System.Drawing.Size(45, 45);
             this.Add8.TabIndex = 7;
             this.Add8.Text = "8";
             this.Add8.UseVisualStyleBackColor = true;
-            this.Add8.Click += new System.EventHandler(this.button2_Click);
+            this.Add8.Click += new System.EventHandler(this.Add8_Click);
             // 
             // Add7
             // 
+            this.Add7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Add7.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            this.Add7.Location = new System.Drawing.Point(13, 174);
+            this.Add7.Location = new System.Drawing.Point(13, 156);
             this.Add7.Name = "Add7";
             this.Add7.Size = new System.Drawing.Size(45, 45);
             this.Add7.TabIndex = 6;
             this.Add7.Text = "7";
             this.Add7.UseVisualStyleBackColor = true;
-            this.Add7.Click += new System.EventHandler(this.button3_Click_1);
+            this.Add7.Click += new System.EventHandler(this.Add7_Click);
             // 
             // Plus
             // 
+            this.Plus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Plus.BackColor = System.Drawing.Color.Coral;
             this.Plus.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            this.Plus.Location = new System.Drawing.Point(166, 72);
+            this.Plus.Location = new System.Drawing.Point(166, 54);
             this.Plus.Name = "Plus";
             this.Plus.Size = new System.Drawing.Size(45, 45);
             this.Plus.TabIndex = 9;
             this.Plus.Text = "+";
             this.Plus.UseVisualStyleBackColor = false;
             this.Plus.Click += new System.EventHandler(this.Plus_Click);
-            this.Plus.MouseHover += new System.EventHandler(this.plusInfo);
             // 
             // Minus
             // 
+            this.Minus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Minus.BackColor = System.Drawing.Color.Coral;
             this.Minus.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            this.Minus.Location = new System.Drawing.Point(217, 72);
+            this.Minus.Location = new System.Drawing.Point(217, 54);
             this.Minus.Name = "Minus";
             this.Minus.Size = new System.Drawing.Size(45, 45);
             this.Minus.TabIndex = 10;
@@ -173,22 +187,24 @@
             // 
             // DivideInt
             // 
+            this.DivideInt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.DivideInt.BackColor = System.Drawing.Color.Coral;
             this.DivideInt.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            this.DivideInt.Location = new System.Drawing.Point(217, 123);
+            this.DivideInt.Location = new System.Drawing.Point(217, 105);
             this.DivideInt.Name = "DivideInt";
             this.DivideInt.Size = new System.Drawing.Size(45, 45);
             this.DivideInt.TabIndex = 11;
             this.DivideInt.Text = "Div";
             this.DivideInt.UseVisualStyleBackColor = false;
             this.DivideInt.Click += new System.EventHandler(this.DivideInt_Click);
-            this.DivideInt.MouseHover += new System.EventHandler(this.button1_MouseHover);
+            this.DivideInt.MouseHover += new System.EventHandler(this.DivideInt_MouseHover);
             // 
             // Multiply
             // 
+            this.Multiply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Multiply.BackColor = System.Drawing.Color.Coral;
             this.Multiply.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            this.Multiply.Location = new System.Drawing.Point(166, 123);
+            this.Multiply.Location = new System.Drawing.Point(166, 105);
             this.Multiply.Name = "Multiply";
             this.Multiply.Size = new System.Drawing.Size(45, 45);
             this.Multiply.TabIndex = 12;
@@ -199,9 +215,10 @@
             // 
             // Rest
             // 
+            this.Rest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Rest.BackColor = System.Drawing.Color.Coral;
             this.Rest.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            this.Rest.Location = new System.Drawing.Point(268, 72);
+            this.Rest.Location = new System.Drawing.Point(268, 54);
             this.Rest.Name = "Rest";
             this.Rest.Size = new System.Drawing.Size(45, 45);
             this.Rest.TabIndex = 13;
@@ -212,9 +229,10 @@
             // 
             // Clear
             // 
+            this.Clear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Clear.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.Clear.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            this.Clear.Location = new System.Drawing.Point(166, 174);
+            this.Clear.Location = new System.Drawing.Point(319, 105);
             this.Clear.Name = "Clear";
             this.Clear.Size = new System.Drawing.Size(45, 45);
             this.Clear.TabIndex = 14;
@@ -225,9 +243,10 @@
             // 
             // Previous
             // 
+            this.Previous.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Previous.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.Previous.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            this.Previous.Location = new System.Drawing.Point(217, 174);
+            this.Previous.Location = new System.Drawing.Point(319, 54);
             this.Previous.Name = "Previous";
             this.Previous.Size = new System.Drawing.Size(45, 45);
             this.Previous.TabIndex = 15;
@@ -238,9 +257,10 @@
             // 
             // DivideFloat
             // 
+            this.DivideFloat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.DivideFloat.BackColor = System.Drawing.Color.Coral;
             this.DivideFloat.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            this.DivideFloat.Location = new System.Drawing.Point(268, 123);
+            this.DivideFloat.Location = new System.Drawing.Point(268, 105);
             this.DivideFloat.Name = "DivideFloat";
             this.DivideFloat.Size = new System.Drawing.Size(45, 45);
             this.DivideFloat.TabIndex = 16;
@@ -249,20 +269,67 @@
             this.DivideFloat.Click += new System.EventHandler(this.DivideFloat_Click);
             this.DivideFloat.MouseHover += new System.EventHandler(this.DivideFloat_MouseHover);
             // 
-            // richTextBox1
+            // outputInfo
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(13, 13);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(300, 53);
-            this.richTextBox1.TabIndex = 17;
-            this.richTextBox1.Text = "";
+            this.outputInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.outputInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.outputInfo.Location = new System.Drawing.Point(13, 13);
+            this.outputInfo.MaxLength = 27;
+            this.outputInfo.Name = "outputInfo";
+            this.outputInfo.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.outputInfo.Size = new System.Drawing.Size(347, 24);
+            this.outputInfo.TabIndex = 17;
+            this.outputInfo.Text = "";
+            this.outputInfo.TextChanged += new System.EventHandler(this.outputInfo_TextChanged);
+            this.outputInfo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.outputInfo_KeyPress);
             // 
-            // MenuForm
+            // Add0
+            // 
+            this.Add0.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Add0.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
+            this.Add0.Location = new System.Drawing.Point(166, 156);
+            this.Add0.Name = "Add0";
+            this.Add0.Size = new System.Drawing.Size(45, 45);
+            this.Add0.TabIndex = 18;
+            this.Add0.Text = "0";
+            this.Add0.UseVisualStyleBackColor = true;
+            this.Add0.Click += new System.EventHandler(this.Add0_Click);
+            // 
+            // EqualsSomething
+            // 
+            this.EqualsSomething.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.EqualsSomething.BackColor = System.Drawing.Color.LimeGreen;
+            this.EqualsSomething.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.EqualsSomething.Location = new System.Drawing.Point(217, 156);
+            this.EqualsSomething.Name = "EqualsSomething";
+            this.EqualsSomething.Size = new System.Drawing.Size(96, 45);
+            this.EqualsSomething.TabIndex = 19;
+            this.EqualsSomething.Text = "=";
+            this.EqualsSomething.UseVisualStyleBackColor = false;
+            // 
+            // PlusMinus
+            // 
+            this.PlusMinus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.PlusMinus.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.PlusMinus.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.PlusMinus.Location = new System.Drawing.Point(319, 156);
+            this.PlusMinus.Name = "PlusMinus";
+            this.PlusMinus.Size = new System.Drawing.Size(45, 45);
+            this.PlusMinus.TabIndex = 20;
+            this.PlusMinus.Text = "+/-";
+            this.PlusMinus.UseVisualStyleBackColor = false;
+            this.PlusMinus.Click += new System.EventHandler(this.PlusMinus_Click);
+            this.PlusMinus.MouseHover += new System.EventHandler(this.PlusMinus_MouseHover);
+            // 
+            // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(329, 234);
-            this.Controls.Add(this.richTextBox1);
+            this.ClientSize = new System.Drawing.Size(372, 211);
+            this.Controls.Add(this.PlusMinus);
+            this.Controls.Add(this.EqualsSomething);
+            this.Controls.Add(this.Add0);
+            this.Controls.Add(this.outputInfo);
             this.Controls.Add(this.DivideInt);
             this.Controls.Add(this.DivideFloat);
             this.Controls.Add(this.Plus);
@@ -280,7 +347,8 @@
             this.Controls.Add(this.Add3);
             this.Controls.Add(this.Add2);
             this.Controls.Add(this.Add1);
-            this.Name = "MenuForm";
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Name = "Menu";
             this.Text = "Калькулятор длинной арифметики";
             this.Load += new System.EventHandler(this.MenuForm_Load);
             this.ResumeLayout(false);
@@ -306,7 +374,10 @@
         private System.Windows.Forms.Button Clear;
         private System.Windows.Forms.Button Previous;
         private System.Windows.Forms.Button DivideFloat;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox outputInfo;
+        private System.Windows.Forms.Button Add0;
+        private System.Windows.Forms.Button EqualsSomething;
+        private System.Windows.Forms.Button PlusMinus;
     }
 }
 

@@ -7,5 +7,6 @@ namespace CalcFormApp
 {
     class Dialog
     {
+
     }
 }
