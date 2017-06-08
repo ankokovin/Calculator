@@ -306,6 +306,7 @@
             this.EqualsSomething.TabIndex = 19;
             this.EqualsSomething.Text = "=";
             this.EqualsSomething.UseVisualStyleBackColor = false;
+            this.EqualsSomething.Click += new System.EventHandler(this.EqualsSomething_Click);
             // 
             // PlusMinus
             // 
@@ -356,28 +357,31 @@
         }
 
         #endregion
-
+        private System.Windows.Forms.Button Add0;
         private System.Windows.Forms.Button Add1;
         private System.Windows.Forms.Button Add2;
         private System.Windows.Forms.Button Add3;
-        private System.Windows.Forms.Button Add6;
-        private System.Windows.Forms.Button Add5;
         private System.Windows.Forms.Button Add4;
-        private System.Windows.Forms.Button Add9;
-        private System.Windows.Forms.Button Add8;
+        private System.Windows.Forms.Button Add5;
+        private System.Windows.Forms.Button Add6;
         private System.Windows.Forms.Button Add7;
+        private System.Windows.Forms.Button Add8;
+        private System.Windows.Forms.Button Add9;
+        
         private System.Windows.Forms.Button Plus;
         private System.Windows.Forms.Button Minus;
         private System.Windows.Forms.Button DivideInt;
         private System.Windows.Forms.Button Multiply;
         private System.Windows.Forms.Button Rest;
+        private System.Windows.Forms.Button DivideFloat;
+
         private System.Windows.Forms.Button Clear;
         private System.Windows.Forms.Button Previous;
-        private System.Windows.Forms.Button DivideFloat;
-        private System.Windows.Forms.RichTextBox outputInfo;
-        private System.Windows.Forms.Button Add0;
-        private System.Windows.Forms.Button EqualsSomething;
         private System.Windows.Forms.Button PlusMinus;
+
+        private System.Windows.Forms.RichTextBox outputInfo;
+        private System.Windows.Forms.Button EqualsSomething;
+        
     }
 }
 

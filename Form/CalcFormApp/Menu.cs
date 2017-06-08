@@ -11,6 +11,7 @@ namespace CalcFormApp
 {
     public partial class Menu : Form
     {
+        #region Basic Setup
         public Menu()
         {
             InitializeComponent();
@@ -19,7 +20,105 @@ namespace CalcFormApp
         {
 
         }
+        #endregion
 
+        #region Functions
+        private void EqualsSomething_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void Plus_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void Clear_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void Multiply_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void DivideInt_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void Minus_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void Previous_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void Rest_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void DivideFloat_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void PlusMinus_Click(object sender, EventArgs e)
+        {
+            if (outputInfo.Text.Length != 0)
+            {
+                if (outputInfo.Text[0] == '-')
+                    outputInfo.Text = outputInfo.Text.Remove(0, 1);
+                else
+                {
+                    char[] arr = outputInfo.Text.ToCharArray();
+                    outputInfo.Text = "-";
+
+                    for (int i = 0; i < arr.Length; i++)
+                        outputInfo.Text = outputInfo.Text + arr[i];
+                }
+            }
+        }
+        #endregion
+
+        #region Additional Features
+        #region Hidden Info
+        private void PlusMinus_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip info = new ToolTip();
+            info.SetToolTip(PlusMinus, "Поменять знак числа");
+        }
+        private void DivideInt_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip info = new ToolTip();
+            info.SetToolTip(DivideInt, "Целочисленное деление");
+        }
+        private void Clear_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip info = new ToolTip();
+            info.SetToolTip(Clear, "Сброс результата");
+        }
+        private void Rest_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip info = new ToolTip();
+            info.SetToolTip(Rest, "Остаток от деления");
+        }
+        private void Multiply_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip info = new ToolTip();
+            info.SetToolTip(Multiply, "Умножить");
+        }
+        private void Previous_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip info = new ToolTip();
+            info.SetToolTip(Previous, "Предыдущее действие");
+        }
+        private void DivideFloat_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip info = new ToolTip();
+            info.SetToolTip(DivideFloat, "Деление с дробной частью");
+        }
+        #endregion
+        #endregion
+
+        #region Input
+        #region ButtonInput
         private void Add0_Click(object sender, EventArgs e)
         {
             outputInfo.Text += Add0.Text;
@@ -60,99 +159,8 @@ namespace CalcFormApp
         {
             outputInfo.Text += Add9.Text;
         }
-
-       
-
-        private void Plus_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void Clear_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void Multiply_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void DivideInt_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void Minus_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void Previous_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void Rest_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void DivideFloat_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        
-
-        private void PlusMinus_Click(object sender, EventArgs e)
-        {
-            if (outputInfo.Text.Length != 0)
-            {
-                if (outputInfo.Text[0] == '-')
-                    outputInfo.Text = outputInfo.Text.Remove(0, 1);
-                else
-                {
-                    char[] arr = outputInfo.Text.ToCharArray();
-                    outputInfo.Text = "-";
-
-                    for (int i = 0; i < arr.Length; i++)
-                        outputInfo.Text = outputInfo.Text + arr[i];
-                }
-            }
-        }
-
-        private void PlusMinus_MouseHover(object sender, EventArgs e)
-        {
-            ToolTip info = new ToolTip();
-            info.SetToolTip(PlusMinus, "Поменять знак числа");
-        }
-        private void DivideInt_MouseHover(object sender, EventArgs e)
-        {
-            ToolTip info = new ToolTip();
-            info.SetToolTip(DivideInt, "Целочисленное деление");
-        }
-        private void Clear_MouseHover(object sender, EventArgs e)
-        {
-            ToolTip info = new ToolTip();
-            info.SetToolTip(Clear, "Сброс результата");
-        }
-        private void Rest_MouseHover(object sender, EventArgs e)
-        {
-            ToolTip info = new ToolTip();
-            info.SetToolTip(Rest, "Остаток от деления");
-        }
-        private void Multiply_MouseHover(object sender, EventArgs e)
-        {
-            ToolTip info = new ToolTip();
-            info.SetToolTip(Multiply, "Умножить");
-        }
-        private void Previous_MouseHover(object sender, EventArgs e)
-        {
-            ToolTip info = new ToolTip();
-            info.SetToolTip(Previous, "Предыдущее действие");
-        }
-        private void DivideFloat_MouseHover(object sender, EventArgs e)
-        {
-            ToolTip info = new ToolTip();
-            info.SetToolTip(DivideFloat, "Деление с дробной частью");
-        }
-
-        
-
+        #endregion
+        #region KeyInput
         private void outputInfo_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == '-')
@@ -167,7 +175,6 @@ namespace CalcFormApp
                 e.Handled = true;
 
         }
-
         private void outputInfo_TextChanged(object sender, EventArgs e)
         {
             if (outputInfo.Text.Length != 0)
@@ -181,6 +188,7 @@ namespace CalcFormApp
             }
         }
 
-        
+        #endregion
+        #endregion
     }
 }
