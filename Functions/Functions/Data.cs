@@ -39,7 +39,7 @@ namespace Functions
         /// <summary>
         /// Основание СИ
         /// </summary>
-        const int Base = 100000;
+        public static int Base = 100000;
         /// <summary>
         /// Самое большое возможное число типа  <see cref="Data"/> 
         /// </summary>
