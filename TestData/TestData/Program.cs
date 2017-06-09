@@ -205,6 +205,20 @@ namespace TestData
             Console.WriteLine("9876543210/1234567890=" + (new Data(9876543210) / new Data(1234567890)) + " Ожидалось: 8");
             Console.ReadLine();
             #endregion Тест цел. деления
+            #region Тест остатка от деления
+            Console.Clear();
+            Console.WriteLine("Попытка 1%0");
+            try { Console.WriteLine(Data.One % new Data()); }
+            catch(Exception e) { Console.WriteLine(e.Message); }
+            Console.WriteLine("0%1=" + new Data() % Data.One + " Ожидалось: 0");
+            Console.WriteLine(Data.MaxValue + "%1=" + Data.MaxValue % Data.One + " Ожидалось: 0");
+            Console.WriteLine((Data.MaxValue - Data.One) + "%" + Data.MaxValue + "=" + (Data.MaxValue - Data.One) + " Ожидалось: " + (Data.MaxValue - Data.One));
+            Console.WriteLine("120/11=" + new Data(120) % new Data(11) + " Ожидалось: 10");
+            Console.WriteLine("-120/11=" + new Data(-120) % new Data(11) + " Ожидалось: 10");
+            Console.WriteLine("120/(-11)=" + new Data(120) % new Data(-11) + " Ожидалось: 10");
+            Console.WriteLine("-120/(-11)=" + new Data(-120) % new Data(-11) + " Ожидалось: 10");
+            Console.ReadLine();
+            #endregion Тест остатка от деления
             #region Тест деления и приведения
             Console.Clear();
             Console.WriteLine("Тест деления и приведения");
