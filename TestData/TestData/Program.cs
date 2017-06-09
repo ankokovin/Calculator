@@ -12,14 +12,15 @@ namespace TestData
         static void Main(string[] args)
         {
             #region Основные тесты
-            #region Тест конструтора+Copy
+            #region Тест конструторов+Copy
             Console.WriteLine("Тест конструтора+Copy");
+            Console.WriteLine("По строке");
             Data d1 = new Data();
             Console.WriteLine(d1);
-            Data d2 = new Data("1");
-            Console.WriteLine(d2);
-            Data d3 = new Data("-1");
-            Console.WriteLine(d3);
+            d1 = new Data("1");
+            Console.WriteLine(d1);
+            d1 = new Data("-1");
+            Console.WriteLine(d1);
             Console.WriteLine("Создание по строке --1");
             try { Data d4 = new Data("--1"); }
             catch (Exception e)
@@ -38,8 +39,8 @@ namespace TestData
             {
                 Console.WriteLine(e.Message);
             }
-            Data d7 = new Data("9999999999999999999999999");
-            Console.WriteLine(d7);
+            d1 = new Data("9999999999999999999999999");
+            Console.WriteLine(d1);
             Console.WriteLine("Создание по строке 99999999999999999999999999 (26 девяток)");
             try
             {
@@ -49,16 +50,24 @@ namespace TestData
             {
                 Console.WriteLine(e.Message);
             }
-            Data d9 = new Data("-9999999999999999999999999");
-            Console.WriteLine(d9);
-            Data d10 = d9.Copy();
+            d1 = new Data("-1000001");
+            Console.WriteLine(d1);
+            d1 = new Data("-0");
+            Console.WriteLine(d1);
+            Console.WriteLine("По числу");
+            Console.WriteLine(new Data(0));
+            Console.WriteLine(new Data(-1));
+            Console.WriteLine(new Data(long.MaxValue));
+            Console.WriteLine(new Data(long.MinValue));
+            Console.WriteLine("Копирование");
+            d1 = new Data("-9999999999999999999999999");
+            Console.WriteLine(d1);
+            Data d10 = d1.Copy();
             Console.WriteLine(d10);
-            Data d11 = new Data("-1000001");
+            Console.WriteLine("Клонирование");
+            object d11 = d1.Clone();
             Console.WriteLine(d11);
-            Data d12 = new Data("-0");
-            Console.WriteLine(d12);
             Console.ReadLine();
-
             #endregion Тест конструтора+Copy
             #region Тест сравнений
             Console.Clear();
@@ -257,7 +266,12 @@ namespace TestData
             #region Тест на деление long/Data
             Console.Clear();
             Console.WriteLine("Тесты на деление long/Data");
-
+            Console.WriteLine("Попытка 1/0");
+            try { Console.WriteLine(1 / new Data()); }
+            catch (Exception e) { Console.WriteLine(e.Message); }
+            Console.WriteLine("0/1="+0/Data.One+" Ожидалось: 0");
+            Console.WriteLine("987654321/123456789=" + 987654321 / new Data(123456789) + " Ожидалось: 8 с хвостиком");
+            Console.WriteLine("-1/2=" + (-1) / new Data(2) + " Ожидалось: -0.5");
             Console.ReadLine();
             #endregion Тест на деление long/Data
             #endregion Тест скрытых операций
