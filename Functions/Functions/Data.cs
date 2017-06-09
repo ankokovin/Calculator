@@ -108,6 +108,14 @@ namespace Functions
         {
             return !(first == second);
         }
+        public static bool operator <=(Data first, Data second)
+        {
+            return !(first > second);
+        }
+        public static bool operator >=(Data first, Data second)
+        {
+            return !(first > second);
+        }
         #endregion Операторы сравнения
         /// <summary>
         /// Глубокое копирование данного числа  <see cref="Data"/> 
@@ -298,17 +306,17 @@ namespace Functions
         public static Data operator /(Data first, Data second)
         {
             if (second == new Data()) throw new Exception("Деление на 0");
-            Data right = first.Copy();
+            Data right = first.Copy()+One;
             Data left = new Data();
             left.Plus= !(first.Plus ^ second.Plus);
             right.Plus = left.Plus;
             if (first == new Data()) return left;
             if (Abs(first)<Abs(second)) return left;
-            Data eps = new Data("1");
+            Data eps = One;
             while (Abs(right-left) > eps)
             {
                 Data mid = (left + right) / 2;
-                if (mid*second<first)
+                if (mid*second<=first)
                 {
                     left = mid;
                 } else
@@ -316,9 +324,7 @@ namespace Functions
                     right = mid;
                 }
             }
-            if (left == right) return left;
-            if (first - second * left < second * right - second) return left;
-            else return right;
+           return left;
         }
         //Целочисленное деление на короткое число
         /// <summary>
