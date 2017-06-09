@@ -7,13 +7,22 @@ using Functions;
 
 namespace TestData
 {
-    //TO DO: Тест умножения и цел. деления
-    //       Тест деления и приведения
+    //09.06.17 Потенциально нерабочие тесты:
+//    1310755700 836008084 /: Ожидалось:1, получили:37500
+//655381067 226045727 /: Ожидалось:2, получили:10000
+//1469593656 1300003282 /: Ожидалось:1, получили:700
+//922847888 875092455 /: Ожидалось:1, получили:8800
+//636318600 400096509 /: Ожидалось:1, получили:75
+//1705960259 600022893 /: Ожидалось:2, получили:50
+//1860410486 400004452 /: Ожидалось:4, получили:56775
+//1742250903 1600026387 /: Ожидалось:1, получили:25
+//1638404567 952827799 /: Ожидалось:1, получили:37500
+//1572979856 1410077357 /: Ожидалось:1, получили:15000
     class Program
     {
         static void Main(string[] args)
         {
-
+            /*
             #region Тест конструтора+Copy
             Console.WriteLine("Тест конструтора+Copy");
             Data d1 = new Data();
@@ -225,7 +234,139 @@ namespace TestData
             Data priv8 = Data.Divide(new Data("999999999999999999999999"), new Data("1"));
             Console.WriteLine("(Data) 999999999999999999999999/1=" + priv8);
             Console.ReadLine();
-            #endregion Тест деления и приведения
+            #endregion Тест деления и приведения */
+            #region Авто-тесты
+
+            
+
+            long N = 100;
+            List<long> first = new List<long>();
+            List<long> second = new List<long>();
+            List<string> error = new List<string>();/*
+            for (long i = 0; i < N; i++)
+            {
+                for (long j = 1; j < N; j++)
+                {
+                    try
+                    {
+                        Data f = new Data(i.ToString());
+                        Data s = new Data(j.ToString());
+                        Data res1 = f + s;
+                        if (res1!=new Data((i + j).ToString()))
+                        {
+                            first.Add(i);
+                            second.Add(j);
+                            error.Add("+: Ожидалось:" + (i + j).ToString() + ", получили:" + res1.ToString());
+                        }
+                        Data res2 = f - s;
+                        if (res2!=new Data((i - j).ToString())) {
+                            first.Add(i);
+                            second.Add(j);
+                            error.Add("-: Ожидалось:" + (i - j).ToString() + ", получили:" + res2.ToString());
+                        }
+                        Data res3 = f * s;
+                        if (res3 != new Data((i * j).ToString()))
+                        {
+                            first.Add(i);
+                            second.Add(j);
+                            error.Add("*: Ожидалось:" + (i * j).ToString() + ", получили:" + res3.ToString());
+                        }
+                        Data res4 = f / s;
+                        if (res4!= new Data((i / j).ToString())) {
+                            first.Add(i);
+                            second.Add(j);
+                            error.Add("/: Ожидалось:" + (i / j).ToString() + ", получили:" + res4.ToString());
+                        }
+                        Console.Clear();
+                        Console.WriteLine(i + " " + j);
+                    }catch(Exception e)
+                    {
+                        first.Add(i);
+                        second.Add(j);
+                        error.Add(e.Message);
+                    }
+
+                }
+            }
+            Console.WriteLine(first.Count);
+            Console.ReadLine();*/
+                                                    
+            long[] ar = { 1310755700, 836008084,
+                                                    655381067, 226045727,
+                                                    1469593656, 1300003282,
+                                                    922847888, 875092455,
+                                                    636318600, 400096509,
+                                                    1705960259, 600022893,
+                                                    1860410486, 400004452,
+                                                    1742250903, 1600026387,
+                                                    1638404567, 952827799,
+                                                    1572979856, 1410077357};
+
+            for (int i = 0; i < ar.Length / 2; i++)
+            {
+                Data d1 = new Data(ar[2 * i].ToString());
+                Data d2 = new Data(ar[2 * i + 1].ToString());
+                Data res = d1 / d2;
+                Console.WriteLine(new Data((ar[2 * i] / ar[2 * i + 1]).ToString()) == res);
+            }
+
+
+            Console.ReadLine();
+            int NumberOfRepeats = 30000;
+            Random rnd = new Random();
+            for (int i = 0; i < NumberOfRepeats; i++)
+            {
+                long a = rnd.Next();
+                long b = rnd.Next();
+                try
+                {
+                    Data f = new Data(a.ToString());
+                    Data s = new Data(b.ToString());
+                    Data res1 = f + s;
+                    if (res1 != new Data((a+b).ToString()))
+                    {
+                        first.Add(a);
+                        second.Add(b);
+                        error.Add("+: Ожидалось:" + (a+b).ToString() + ", получили:" + res1.ToString());
+                    }
+                    Data res2 = f - s;
+                    if (res2 != new Data((a-b).ToString()))
+                    {
+                        first.Add(a);
+                        second.Add(b);
+                        error.Add("-: Ожидалось:" + (a-b).ToString() + ", получили:" + res2.ToString());
+                    }
+                    Data res3 = f * s;
+                    if (res3 != new Data((a*b).ToString()))
+                    {
+                        first.Add(a);
+                        second.Add(b);
+                        error.Add("*: Ожидалось:" + (a * b).ToString() + ", получили:" + res3.ToString());
+                    }
+                    Data res4 = f / s;
+                    if (res4 != new Data((a / b).ToString()))
+                    {
+                        first.Add(a);
+                        second.Add(b);
+                        error.Add("/: Ожидалось:" + (a / b).ToString() + ", получили:" + res4.ToString());
+                    }
+                    Console.Clear();
+                    Console.WriteLine(i);
+                }
+                catch (Exception e)
+                {
+                    first.Add(a);
+                    second.Add(b);
+                    error.Add(e.Message);
+                }
+            }
+            Console.WriteLine(first.Count);
+            for (int i = 0; i < first.Count; i++)
+            {
+                Console.WriteLine(first[i] + " " + second[i] + " " + error[i]);
+            }
+            Console.ReadLine();
+            #endregion Авто-тесты
         }
     }
 }
