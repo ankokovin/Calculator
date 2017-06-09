@@ -323,10 +323,11 @@ namespace Functions
         public static Data operator /(Data first, Data second)
         {
             if (second == new Data()) throw new Exception("Деление на 0");
-            Data right = first.Copy()+One;
+            Data right = first.Copy();
             Data left = new Data();
             left.Plus= !(first.Plus ^ second.Plus);
             right.Plus = left.Plus;
+            right++;
             if (first == new Data()) return left;
             if (Abs(first)<Abs(second)) return left;
             Data eps = One;

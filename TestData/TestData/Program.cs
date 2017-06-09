@@ -11,6 +11,7 @@ namespace TestData
     {
         static void Main(string[] args)
         {
+            /*
             #region Тест конструтора+Copy
             Console.WriteLine("Тест конструтора+Copy");
             Data d1 = new Data();
@@ -224,8 +225,11 @@ namespace TestData
             Console.ReadLine();
             #endregion Тест деления и приведения */
             #region Авто-тесты
+            Data d1 = new Data("-99");
+            Data d2 = new Data("-1");
+            Data d3 = d1 / d2;
 
-               
+
 
             long N = 100;
             Console.WriteLine("Тестирование действий с числами не больше " + N + "по модулю");
