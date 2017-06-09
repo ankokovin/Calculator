@@ -227,17 +227,13 @@ namespace TestData
             Console.ReadLine();
             #endregion Тест деления и приведения */
             #region Авто-тесты
-            long a = 1, b = 1;
-            Data a1 = new Data(a.ToString());
-            Data b1 = new Data(b.ToString());
-            Data c1 = a1 / b1;
-            long c = a / b;
-            Console.WriteLine(c + " " + c1);
-            Console.ReadLine();
+
+            int a1 = 1310755700;
+
             long N = 100;
             List<long> first = new List<long>();
             List<long> second = new List<long>();
-            List<string> error = new List<string>();
+            List<string> error = new List<string>();/*
             for (long i = 0; i < N; i++)
             {
                 for (long j = 1; j < N; j++)
@@ -284,7 +280,60 @@ namespace TestData
                 }
             }
             Console.WriteLine(first.Count);
-            Console.WriteLine(first[0] + " " + second[0] + " " + error[0]);
+            Console.ReadLine();*/
+            int NumberOfRepeats = 30000;
+            Random rnd = new Random();
+            for (int i = 0; i < NumberOfRepeats; i++)
+            {
+                long a = rnd.Next();
+                long b = rnd.Next();
+                try
+                {
+                    Data f = new Data(a.ToString());
+                    Data s = new Data(b.ToString());
+                    Data res1 = f + s;
+                    if (res1 != new Data((a+b).ToString()))
+                    {
+                        first.Add(a);
+                        second.Add(b);
+                        error.Add("+: Ожидалось:" + (a+b).ToString() + ", получили:" + res1.ToString());
+                    }
+                    Data res2 = f - s;
+                    if (res2 != new Data((a-b).ToString()))
+                    {
+                        first.Add(a);
+                        second.Add(b);
+                        error.Add("-: Ожидалось:" + (a-b).ToString() + ", получили:" + res2.ToString());
+                    }
+                    Data res3 = f * s;
+                    if (res3 != new Data((a*b).ToString()))
+                    {
+                        first.Add(a);
+                        second.Add(b);
+                        error.Add("*: Ожидалось:" + (a * b).ToString() + ", получили:" + res3.ToString());
+                    }
+                    Data res4 = f / s;
+                    if (res4 != new Data((a / b).ToString()))
+                    {
+                        first.Add(a);
+                        second.Add(b);
+                        error.Add("/: Ожидалось:" + (a / b).ToString() + ", получили:" + res4.ToString());
+                    }
+                    Console.Clear();
+                    Console.WriteLine(i);
+                }
+                catch (Exception e)
+                {
+                    first.Add(a);
+                    second.Add(b);
+                    error.Add(e.Message);
+                }
+            }
+            Console.WriteLine(first.Count);
+            for (int i = 0; i < first.Count; i++)
+            {
+                Console.WriteLine(first[i] + " " + second[i] + " " + error[i]);
+            }
             Console.ReadLine();
             #endregion Авто-тесты
         }
