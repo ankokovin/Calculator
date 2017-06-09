@@ -106,6 +106,14 @@ namespace Functions
             Digits[count]= int.Parse(Input);
             ZeroFix();
         }
+        /// <summary>
+        /// Конструктор числа <see cref="Data" по числу <see cref="long"/>/>
+        /// </summary>
+        /// <param name="Input">Исходное число типа <see cref="long"/></param>
+        public Data(long Input):this(Input.ToString())
+        {
+
+        }
         #endregion Конструкторы
         #region Операторы сравнения
         public static bool operator < (Data first, Data second)
@@ -363,6 +371,7 @@ namespace Functions
         /// <returns>Частное типа <see cref="Data"/></returns>
         public static double operator / (long first, Data second)
         {
+            if (second == new Data()) throw new DivideByZeroException();
             double div = 0;
             for (int i = 0; i < second.Count; i++) div += second.Digits[i] * Math.Pow(Base, i);
             return first / div;
