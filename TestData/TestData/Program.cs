@@ -11,6 +11,7 @@ namespace TestData
     {
         static void Main(string[] args)
         {
+            #region Основные тесты
             #region Тест конструтора+Copy
             Console.WriteLine("Тест конструтора+Copy");
             Data d1 = new Data();
@@ -227,6 +228,40 @@ namespace TestData
             Console.WriteLine("(Data) 999999999999999999999999/1=" + priv8);
             Console.ReadLine();
             #endregion Тест деления и приведения 
+            #endregion Основные тесты
+            #region Тесты скрытых операций (в классе, но не вызываемые напрямую)
+            #region Тест на деление Data/int
+            Console.Clear();
+            Console.WriteLine("Тесты деление Data/int");
+            Console.WriteLine("Попытка 1/0");
+            try { Console.WriteLine("1/0=" + Data.One / 0); }
+            catch (Exception e) { Console.WriteLine(e.Message); }
+            Console.WriteLine("0/1=" + new Data() / 1 + " Ожидалось: 0");
+            Console.WriteLine("0/(-1)=" + (new Data() / -1) + " Ожидалось: 0");
+            Console.WriteLine("12/33=" + (new Data("12") / 33) + " Ожидалось: 0");
+            Console.WriteLine("-12/33=" + (new Data("-12") / 33) + " Ожидалось: 0");
+            Console.WriteLine("12/(-33)=" + (new Data("12") / -33) + " Ожидалось: 0");
+            Console.WriteLine("-12/(-33)=" + (new Data("-12") / -33) + " Ожидалось: 0");
+            Console.WriteLine("121/11=" + (new Data("121") / 11) + " Ожидалось: 11");
+            Console.WriteLine("-121/11=" + (new Data("-121") / 11) + " Ожидалось: -11");
+            Console.WriteLine("121/(-11)=" + (new Data("121") / -11) + " Ожидалось: -11");
+            Console.WriteLine("-121/(-11)=" + (new Data("-121") / -11) + " Ожидалось: 11");
+            Console.WriteLine((Data.Base-1) + "/" + (Data.Base-1) + "=" + (new Data((Data.Base - 1).ToString()) / (Data.Base-1)) + " Ожидалось: 1");
+            Console.WriteLine((Data.Base - 2) + "/" + (Data.Base-1) + "=" + (new Data((Data.Base - 2).ToString()) / (Data.Base-1)) + "Ожидалось: 1");
+            Console.WriteLine((Data.Base-1) + "/" + (Data.Base - 2) + "=" + (new Data((Data.Base-1).ToString()) / (Data.Base - 2)) + "Ожидалось: 1");
+            Console.WriteLine("Попытка " + int.MaxValue + "/" + int.MaxValue);
+            try { Console.WriteLine(int.MaxValue + "/" + int.MaxValue + "=" + (new Data(int.MaxValue.ToString()) / int.MaxValue) + "Ожидалось: 1"); }
+            catch (Exception e) { Console.WriteLine(e.Message); }
+            Console.ReadLine();
+            #endregion Тест на деление Data/int
+            #region Тест на деление long/Data
+            Console.Clear();
+            Console.WriteLine("Тесты на деление long/Data");
+
+            Console.ReadLine();
+            #endregion Тест на деление long/Data
+            #endregion Тест скрытых операций
+            #region Переборные тесты
             #region Тесты полный перебор от -N до N
             long N = 100;
             Console.Clear();
@@ -426,6 +461,7 @@ namespace TestData
             Console.WriteLine("Data: " + divRes);
             Console.ReadLine();
             #endregion Рандомные тесты на Divide
+            #endregion Переборные тесты
             #region Различные другие тесты
             Console.Clear();
             Random r = new Random();

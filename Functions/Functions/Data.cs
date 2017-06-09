@@ -334,7 +334,7 @@ namespace Functions
            return left;
         }
         /// <summary>
-        /// Целочисленное деление числа типа <see cref="Data"/> на число типа <see cref="int"/>
+        /// Целочисленное деление числа типа <see cref="Data"/> на число типа <see cref="int"/> с округлением
         /// </summary>
         /// <param name="first">Делимое типа <see cref="Data"/></param>
         /// <param name="second">Делитель типа <see cref="int"/></param>
@@ -342,6 +342,7 @@ namespace Functions
         public static Data operator / (Data input,int div)
         {
             if (div >= Base) throw new Exception("Делитель - слишком длинное число.");
+            if (div == 0) throw new DivideByZeroException();
             Data result = input.Copy();
             long reminder = 0;
             for (int i=input.Count-1;i>=0;i--)
@@ -352,7 +353,7 @@ namespace Functions
             }
             if ((double)reminder / div > 0.5) result++;
             result.ZeroFix();
-                return result;
+            return result;
         }
         /// <summary>
         /// Целочисленное деление числа типа <see cref="long"/> на число типа <see cref="Data"/>
