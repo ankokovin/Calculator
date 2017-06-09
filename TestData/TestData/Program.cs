@@ -17,7 +17,7 @@ namespace TestData
             Console.WriteLine("По строке");
             Data d1 = new Data();
             Console.WriteLine(d1);
-            d1 = new Data("1");
+            d1 = Data.One;
             Console.WriteLine(d1);
             d1 = new Data("-1");
             Console.WriteLine(d1);
@@ -75,18 +75,18 @@ namespace TestData
             Console.WriteLine("0 == 0" + (new Data() == new Data()) + " Ожидалось: True");
             Console.WriteLine("0 > 0" + (new Data() > new Data()) + " Ожидалось: False");
             Console.WriteLine("0 < 0" + (new Data() < new Data()) + " Ожидалось: False");
-            Console.WriteLine("-1 < 1" + (new Data("-1") < new Data("1")) + " Ожидалось: True");
-            Console.WriteLine("-1 == 1" + (new Data("-1") == new Data("1")) + " Ожидалось: False");
-            Console.WriteLine("-1 > 1" + (new Data("-1") > new Data("1")) + " Ожидалось: False");
-            Console.WriteLine("1 < -1" + (new Data("1") < new Data("-1")) + " Ожидалось: False");
-            Console.WriteLine("1 == -1" + (new Data("1") == new Data("-1")) + " Ожидалось: False");
-            Console.WriteLine("1 > -1" + (new Data("1") > new Data("-1")) + " Ожидалось: True ");
-            Console.WriteLine("100000 > 1" + (new Data("100000") > new Data("1")) + " Ожидалось: True");
-            Console.WriteLine("100000 == 1" + (new Data("100000") == new Data("1")) + " Ожидалось: False");
-            Console.WriteLine("100000 < 1" + (new Data("100000") < new Data("1")) + " Ожидалось: False");
-            Console.WriteLine("1>100000" + (new Data("1") > new Data("100000")) + " Ожидалось: False");
-            Console.WriteLine("1==100000" + (new Data("1") == new Data("100000")) + " Ожидалось: False");
-            Console.WriteLine("1<100000" + (new Data("1") < new Data("100000")) + " Ожидалось: True");
+            Console.WriteLine("-1 < 1" + (new Data(-1) < Data.One) + " Ожидалось: True");
+            Console.WriteLine("-1 == 1" + (new Data(-1) == Data.One) + " Ожидалось: False");
+            Console.WriteLine("-1 > 1" + (new Data(-1) >  Data.One) + " Ожидалось: False");
+            Console.WriteLine("1 < -1" + (Data.One < new Data(-1)) + " Ожидалось: False");
+            Console.WriteLine("1 == -1" + (Data.One == new Data(-1)) + " Ожидалось: False");
+            Console.WriteLine("1 > -1" + (Data.One > new Data(-1)) + " Ожидалось: True ");
+            Console.WriteLine("100000 > 1" + (new Data(100000) > Data.One) + " Ожидалось: True");
+            Console.WriteLine("100000 == 1" + (new Data(100000) == Data.One) + " Ожидалось: False");
+            Console.WriteLine("100000 < 1" + (new Data(100000) < Data.One) + " Ожидалось: False");
+            Console.WriteLine("1>100000" + (Data.One > new Data(100000)) + " Ожидалось: False");
+            Console.WriteLine("1==100000" + (Data.One == new Data(100000)) + " Ожидалось: False");
+            Console.WriteLine("1<100000" + (Data.One < new Data(100000)) + " Ожидалось: True");
             Console.WriteLine("9999999999999999999999999 == 9999999999999999999999999" +
                 (new Data("9999999999999999999999999") == new Data("9999999999999999999999999")) + " Ожидалось: True");
             Console.WriteLine("9999999999999999999999999 > 9999999999999999999999999" +
@@ -110,36 +110,36 @@ namespace TestData
             #region Тест сложения и вычитания
             Console.Clear();
             Console.WriteLine("Тест сложения и вычитания");
-            Data inc = new Data("-1");
+            Data inc = new Data(-1);
             Console.WriteLine("++(-1)=" + (++inc) + " Ожидалось:  0");
             Console.WriteLine("++0=" + (++inc) + " Ожидалось:  1");
             Console.WriteLine("++1=" + (++inc) + " Ожидалось:  2");
-            inc = new Data("9999");
+            inc = new Data(9999);
             Console.WriteLine("++9999=" + (++inc) + " Ожидалось:  10000");
             Console.WriteLine("0+0=" + (new Data() + new Data()) + " Ожидалось:  0");
-            Console.WriteLine("0+10=" + (new Data() + new Data("10")) + " Ожидалось:  10");
-            Console.WriteLine("10+0=" + (new Data("10") + new Data()) + " Ожидалось:  10");
-            Console.WriteLine("1000000000+1=" + (new Data("1000000000") + new Data("1")) + " Ожидалось: 1000000001");
-            Console.WriteLine("9+1=" + (new Data("9") + new Data("1")) + " Ожидалось:  10");
-            Console.WriteLine("109999999999+1=" + (new Data("109999999999") + new Data("1")) + " Ожидалось: 110000000000");
-            Console.WriteLine("-10+(-100)=" + (new Data("-10") + new Data("-100")) + " Ожидалось: -110");
+            Console.WriteLine("0+10=" + (new Data() + new Data(10)) + " Ожидалось:  10");
+            Console.WriteLine("10+0=" + (new Data(10) + new Data()) + " Ожидалось:  10");
+            Console.WriteLine("1000000000+1=" + (new Data(1000000000) + Data.One) + " Ожидалось: 1000000001");
+            Console.WriteLine("9+1=" + (new Data(9) +  Data.One) + " Ожидалось:  10");
+            Console.WriteLine("109999999999+1=" + (new Data("109999999999") + Data.One) + " Ожидалось: 110000000000");
+            Console.WriteLine("-10+(-100)=" + (new Data(-10) + new Data(-100)) + " Ожидалось: -110");
             Console.WriteLine("Попытка подсчитать 9999999999999999999999999 + 1 (25 девяток + 1)");
             try { Data s = Data.MaxValue + Data.One; }
             catch (Exception e) { Console.WriteLine(e.Message); }
             Console.WriteLine("999999999999999999999999+1=" + (new Data("999999999999999999999999") + Data.One) + " Ожидалось: 1000000000000000000000000");
-            Console.WriteLine("10+(-10)=" + (new Data("10") + new Data("-10")) + " Ожидалось: 0");
-            Console.WriteLine("99+(-9)=" + (new Data("99") + new Data("-9")) + " Ожидалось: 90");
-            Console.WriteLine("9+(-99)=" + (new Data("9") + new Data("-99")) + " Ожидалось: -90");
-            Console.WriteLine("-9+99=" + (new Data("-9") + new Data("99")) + " Ожидалось: 90");
-            Console.WriteLine("-99+9=" + (new Data("-99") + new Data("9")) + " Ожидалось: -90");
+            Console.WriteLine("10+(-10)=" + (new Data(10) + new Data(-10)) + " Ожидалось: 0");
+            Console.WriteLine("99+(-9)=" + (new Data(99) + new Data(-9)) + " Ожидалось: 90");
+            Console.WriteLine("9+(-99)=" + (new Data(9) + new Data(-99)) + " Ожидалось: -90");
+            Console.WriteLine("-9+99=" + (new Data(-9) + new Data(99)) + " Ожидалось: 90");
+            Console.WriteLine("-99+9=" + (new Data(-99) + new Data(9)) + " Ожидалось: -90");
             Console.WriteLine("0-0=" + (new Data() - new Data()) + " Ожидалось: 0");
-            Console.WriteLine("0-10=" + (new Data() - new Data("10")) + " Ожидалось: -10");
-            Console.WriteLine("10-0=" + (new Data("10") - new Data("0")) + " Ожидалось: 10");
-            Console.WriteLine("100000000-1=" + (new Data("100000000") - new Data("1")) + " Ожидалось: 99999999");
-            Console.WriteLine("1-100000000=" + (new Data("1") - new Data("100000000")) + " Ожидалось: -99999999");
-            Console.WriteLine("-10-(-100)=" + (new Data("-10") - new Data("-100")) + " Ожидалось: 90");
-            Console.WriteLine("10-(-10)=" + (new Data("10") - new Data("-10")) + " Ожидалось: 20");
-            Console.WriteLine("-10-10=" + (new Data("-10") - new Data("10")) + " Ожидалось: -20");
+            Console.WriteLine("0-10=" + (new Data() - new Data(10)) + " Ожидалось: -10");
+            Console.WriteLine("10-0=" + (new Data(10) - new Data()) + " Ожидалось: 10");
+            Console.WriteLine("100000000-1=" + (new Data(100000000) -  Data.One) + " Ожидалось: 99999999");
+            Console.WriteLine("1-100000000=" + (Data.One - new Data(100000000)) + " Ожидалось: -99999999");
+            Console.WriteLine("-10-(-100)=" + (new Data(-10) - new Data(-100)) + " Ожидалось: 90");
+            Console.WriteLine("10-(-10)=" + (new Data(10) - new Data(-10)) + " Ожидалось: 20");
+            Console.WriteLine("-10-10=" + (new Data(-10) - new Data(10)) + " Ожидалось: -20");
 
             Console.ReadLine();
             #endregion Тест сложения и вычитания
@@ -147,36 +147,36 @@ namespace TestData
             Console.Clear();
             Console.WriteLine("Тест умножения");
             Console.WriteLine("0*0=" + (new Data() * new Data()) + " Ожидалось: 0");
-            Console.WriteLine("1000000*0=" + (new Data("1000000") * new Data()) + " Ожидалось: 0");
-            Console.WriteLine("0*1000000=" + (new Data() * new Data("1000000")) + " Ожидалось: 0");
-            Console.WriteLine("1000000*1=" + (new Data("1000000") * new Data("1")) + " Ожидалось: 1000000");
-            Console.WriteLine("1*1000000=" + (new Data("1") * new Data("1000000")) + " Ожидалось: 1000000");
-            Console.WriteLine("1000*1000=" + (new Data("1000") * new Data("1000")) + " Ожидалось: 1000000");
-            Console.WriteLine("10000001*10000001=" + (new Data("10000001") * new Data("10000001")) + " Ожидалось: 100000020000001");
-            Console.WriteLine("-1*1000=" + (new Data("-1") * new Data("1000")) + " Ожидалось: -1000");
-            Console.WriteLine("1000*(-1)=" + (new Data("1000") * new Data("-1")) + " Ожидалось: -1000");
-            Console.WriteLine("1234567890*987654321=" + (new Data("1234567890") * new Data("987654321")) + " "
-                + ((new Data("1234567890") * new Data("987654321")) == new Data("1219326311126352690")) + " Ожидалось: 1219326311126352690");
-            Console.WriteLine("-1234567890*987654321=" + (new Data("-1234567890") * new Data("987654321")) + " "
-               + ((new Data("-1234567890") * new Data("987654321")) == new Data("-1219326311126352690")) + " Ожидалось: -1219326311126352690");
-            Console.WriteLine("-1234567890*(-987654321)=" + (new Data("-1234567890") * new Data("-987654321")) + " "
-               + ((new Data("-1234567890") * new Data("-987654321")) == new Data("1219326311126352690")) + " Ожидалось: 1219326311126352690");
+            Console.WriteLine("1000000*0=" + (new Data(1000000) * new Data()) + " Ожидалось: 0");
+            Console.WriteLine("0*1000000=" + (new Data() * new Data(1000000)) + " Ожидалось: 0");
+            Console.WriteLine("1000000*1=" + (new Data(1000000) * Data.One) + " Ожидалось: 1000000");
+            Console.WriteLine("1*1000000=" + (Data.One * new Data(1000000)) + " Ожидалось: 1000000");
+            Console.WriteLine("1000*1000=" + (new Data(1000) * new Data(1000)) + " Ожидалось: 1000000");
+            Console.WriteLine("10000001*10000001=" + (new Data(10000001) * new Data(10000001)) + " Ожидалось: 100000020000001");
+            Console.WriteLine("-1*1000=" + (new Data(-1) * new Data(1000)) + " Ожидалось: -1000");
+            Console.WriteLine("1000*(-1)=" + (new Data(1000) * new Data(-1)) + " Ожидалось: -1000");
+            Console.WriteLine("1234567890*987654321=" + (new Data(1234567890) * new Data(987654321)) + " "
+                + ((new Data(1234567890) * new Data(987654321)) == new Data("1219326311126352690")) + " Ожидалось: 1219326311126352690");
+            Console.WriteLine("-1234567890*987654321=" + (new Data(-1234567890) * new Data(987654321)) + " "
+               + ((new Data(-1234567890) * new Data("987654321")) == new Data("-1219326311126352690")) + " Ожидалось: -1219326311126352690");
+            Console.WriteLine("-1234567890*(-987654321)=" + (new Data(-1234567890) * new Data(-987654321)) + " "
+               + ((new Data(-1234567890) * new Data(-987654321)) == new Data("1219326311126352690")) + " Ожидалось: 1219326311126352690");
             Console.WriteLine("Попытка подсчитать 9999999999999999999999999*10 (25 девяток * 10)");
-            try { Console.WriteLine("9999999999999999999999999*10=" + (Data.MaxValue * new Data("10"))); }
+            try { Console.WriteLine("9999999999999999999999999*10=" + (Data.MaxValue * new Data(10))); }
             catch (Exception e) { Console.WriteLine(e.Message); }
             Console.WriteLine("Попытка подсчитать 99999999999999999999*1000000 (20 девяток * 1000000)");
             try
             {
                 Console.WriteLine("99999999999999999999*1000000=" +
-              (new Data("99999999999999999999") * new Data("1000000")));
+              (new Data("99999999999999999999") * new Data(1000000)));
             }
             catch (Exception e) { Console.WriteLine(e.Message); }
-            Console.WriteLine("1111111111111111111111111*9=" + (new Data("1111111111111111111111111") * new Data("9")) + " Ожидалось: 9999999999999999999999999");
+            Console.WriteLine("1111111111111111111111111*9=" + (new Data("1111111111111111111111111") * new Data(9)) + " Ожидалось: 9999999999999999999999999");
             Console.WriteLine("Попытка подсчитать 1111111111111111111111111*10 (25 едениц * 10");
             try
             {
                 Console.WriteLine("1111111111111111111111111*10=" +
-                    (new Data("1111111111111111111111111") * new Data("10")));
+                    (new Data("1111111111111111111111111") * new Data(10)));
             }
             catch (Exception e) { Console.WriteLine(e.Message); }
             Console.ReadLine();
@@ -184,56 +184,57 @@ namespace TestData
             #region Тест цел. деления
             Console.Clear();
             Console.WriteLine("Тест цел. деления");
+            Console.WriteLine("Попытка деления на 0");
             try
             {
-                Console.WriteLine("1/0=" + (new Data("1") / new Data()));
+                Console.WriteLine("1/0=" + (Data.One / new Data()));
             }
             catch (Exception e) { Console.WriteLine(e.Message); }
-            Console.WriteLine("0/1=" + (new Data() / new Data("1")) + " Ожидалось: 0");
-            Console.WriteLine("0/(-1)=" + (new Data() / new Data("-1")) + " Ожидалось: 0");
-            Console.WriteLine("12/33=" + (new Data("12") / new Data("33")) + " Ожидалось: 0");
-            Console.WriteLine("-12/33=" + (new Data("-12") / new Data("33")) + " Ожидалось: 0");
-            Console.WriteLine("12/(-33)=" + (new Data("12") / new Data("-33")) + " Ожидалось: 0");
-            Console.WriteLine("-12/(-33)=" + (new Data("-12") / new Data("-33")) + " Ожидалось: 0");
-            Console.WriteLine("121/11=" + (new Data("121") / new Data("11")) + " Ожидалось: 11");
-            Console.WriteLine("-121/11=" + (new Data("-121") / new Data("11")) + " Ожидалось: -11");
-            Console.WriteLine("121/(-11)=" + (new Data("121") / new Data("-11")) + " Ожидалось: -11");
-            Console.WriteLine("-121/(-11)=" + (new Data("-121") / new Data("-11")) + " Ожидалось: 11");
-            Console.WriteLine("9999999999/9999999999=" + (new Data("9999999999") / new Data("9999999999")) + " Ожидалось: 1");
-            Console.WriteLine("9999999999/9999999998=" + (new Data("9999999999") / new Data("9999999998")) + " Ожидалось: 1");
-            Console.WriteLine("9876543210/1234567890=" + (new Data("9876543210") / new Data("1234567890")) + " Ожидалось: 8");
+            Console.WriteLine("0/1=" + (new Data() / Data.One) + " Ожидалось: 0");
+            Console.WriteLine("0/(-1)=" + (new Data() / new Data(-1)) + " Ожидалось: 0");
+            Console.WriteLine("12/33=" + (new Data(12) / new Data(33)) + " Ожидалось: 0");
+            Console.WriteLine("-12/33=" + (new Data(-12) / new Data(33)) + " Ожидалось: 0");
+            Console.WriteLine("12/(-33)=" + (new Data(12) / new Data(-33)) + " Ожидалось: 0");
+            Console.WriteLine("-12/(-33)=" + (new Data(-12) / new Data(-33)) + " Ожидалось: 0");
+            Console.WriteLine("121/11=" + (new Data(121) / new Data(11)) + " Ожидалось: 11");
+            Console.WriteLine("-121/11=" + (new Data(-121) / new Data(11)) + " Ожидалось: -11");
+            Console.WriteLine("121/(-11)=" + (new Data(121) / new Data(-11)) + " Ожидалось: -11");
+            Console.WriteLine("-121/(-11)=" + (new Data(-121) / new Data(-11)) + " Ожидалось: 11");
+            Console.WriteLine("9999999999/9999999999=" + (new Data(9999999999) / new Data(9999999999)) + " Ожидалось: 1");
+            Console.WriteLine("9999999999/9999999998=" + (new Data(9999999999) / new Data(9999999998)) + " Ожидалось: 1");
+            Console.WriteLine("9876543210/1234567890=" + (new Data(9876543210) / new Data(1234567890)) + " Ожидалось: 8");
             Console.ReadLine();
             #endregion Тест цел. деления
             #region Тест деления и приведения
             Console.Clear();
             Console.WriteLine("Тест деления и приведения");
-            try { Console.WriteLine("1/0=" + Data.Divide(new Data("1"), new Data()) + " Ожидалось: "); }
+            try { Console.WriteLine("1/0=" + Data.Divide(Data.One, new Data()) + " Ожидалось: "); }
             catch (Exception e) { Console.WriteLine(e.Message); }
-            Console.WriteLine("0/1=" + Data.Divide(new Data(), new Data("1")));
-            Console.WriteLine("9999999999/9999999999=" + Data.Divide(new Data("9999999999"), new Data("9999999999")));
-            Console.WriteLine("9999999999/9999999998=" + Data.Divide(new Data("9999999999"), new Data("9999999998")));
-            Console.WriteLine("9876543210/1234567890=" + Data.Divide(new Data("9876543210"), new Data("1234567890")));
-            Console.WriteLine("12/33=" + Data.Divide(new Data("12"), new Data("33")));
-            Console.WriteLine("-12/33=" + Data.Divide(new Data("-12"), new Data("33")));
-            Console.WriteLine("12/(-33)=" + Data.Divide(new Data("12"), new Data("-33")));
-            Console.WriteLine("-12/(-33)=" + Data.Divide(new Data("-12"), new Data("-33")));
-            Console.WriteLine("-121/11=" + Data.Divide(new Data("-121"), new Data("11")));
-            Console.WriteLine("121/(-11)=" + Data.Divide(new Data("121"), new Data("-11")));
-            Data priv1 = Data.Divide(new Data("9999999999"), new Data("9999999998"));
+            Console.WriteLine("0/1=" + Data.Divide(new Data(), Data.One));
+            Console.WriteLine("9999999999/9999999999=" + Data.Divide(new Data(9999999999), new Data(9999999999)));
+            Console.WriteLine("9999999999/9999999998=" + Data.Divide(new Data(9999999999), new Data(9999999998)));
+            Console.WriteLine("9876543210/1234567890=" + Data.Divide(new Data(9876543210), new Data(1234567890)));
+            Console.WriteLine("12/33=" + Data.Divide(new Data(12), new Data(33)));
+            Console.WriteLine("-12/33=" + Data.Divide(new Data(-12), new Data(33)));
+            Console.WriteLine("12/(-33)=" + Data.Divide(new Data(12), new Data(-33)));
+            Console.WriteLine("-12/(-33)=" + Data.Divide(new Data(-12), new Data(-33)));
+            Console.WriteLine("-121/11=" + Data.Divide(new Data(-121), new Data(11)));
+            Console.WriteLine("121/(-11)=" + Data.Divide(new Data(121), new Data(-11)));
+            Data priv1 = Data.Divide(new Data(9999999999), new Data(9999999998));
             Console.WriteLine("(Data)9999999999/9999999998=" + priv1);
-            Data priv2 = Data.Divide(new Data("9876543210"), new Data("1234567890"));
+            Data priv2 = Data.Divide(new Data(9876543210), new Data(1234567890));
             Console.WriteLine("(Data)9876543210/1234567890=" + priv2);
-            Data priv3 = Data.Divide(new Data("-12"), new Data("33"));
+            Data priv3 = Data.Divide(new Data(-12), new Data(33));
             Console.WriteLine("(Data)(-12)/33=" + priv3);
-            Data priv4 = Data.Divide(new Data("121"), new Data("-11"));
+            Data priv4 = Data.Divide(new Data(121), new Data(-11));
             Console.WriteLine("(Data) 121/(-11)=" + priv4);
-            Data priv5 = Data.Divide(new Data("1"), new Data("2"));
+            Data priv5 = Data.Divide(Data.One, new Data(2));
             Console.WriteLine("(Data) 1/2=" + priv5);
-            Data priv6 = Data.Divide(new Data("499999"), new Data("1000000"));
+            Data priv6 = Data.Divide(new Data(499999), new Data(1000000));
             Console.WriteLine("(Data) 499999/1000000=" + priv6);
-            Data priv7 = Data.Divide(new Data("9999999999999999999999999"), new Data("1"));
+            Data priv7 = Data.Divide(new Data("9999999999999999999999999"), Data.One);
             Console.WriteLine("(Data) 9999999999999999999999999/1=" + priv7);
-            Data priv8 = Data.Divide(new Data("999999999999999999999999"), new Data("1"));
+            Data priv8 = Data.Divide(new Data("999999999999999999999999"), Data.One);
             Console.WriteLine("(Data) 999999999999999999999999/1=" + priv8);
             Console.ReadLine();
             #endregion Тест деления и приведения 
@@ -247,14 +248,14 @@ namespace TestData
             catch (Exception e) { Console.WriteLine(e.Message); }
             Console.WriteLine("0/1=" + new Data() / 1 + " Ожидалось: 0");
             Console.WriteLine("0/(-1)=" + (new Data() / -1) + " Ожидалось: 0");
-            Console.WriteLine("12/33=" + (new Data("12") / 33) + " Ожидалось: 0");
-            Console.WriteLine("-12/33=" + (new Data("-12") / 33) + " Ожидалось: 0");
-            Console.WriteLine("12/(-33)=" + (new Data("12") / -33) + " Ожидалось: 0");
-            Console.WriteLine("-12/(-33)=" + (new Data("-12") / -33) + " Ожидалось: 0");
-            Console.WriteLine("121/11=" + (new Data("121") / 11) + " Ожидалось: 11");
-            Console.WriteLine("-121/11=" + (new Data("-121") / 11) + " Ожидалось: -11");
-            Console.WriteLine("121/(-11)=" + (new Data("121") / -11) + " Ожидалось: -11");
-            Console.WriteLine("-121/(-11)=" + (new Data("-121") / -11) + " Ожидалось: 11");
+            Console.WriteLine("12/33=" + (new Data(12) / 33) + " Ожидалось: 0");
+            Console.WriteLine("-12/33=" + (new Data(-12) / 33) + " Ожидалось: 0");
+            Console.WriteLine("12/(-33)=" + (new Data(12) / -33) + " Ожидалось: 0");
+            Console.WriteLine("-12/(-33)=" + (new Data(-12) / -33) + " Ожидалось: 0");
+            Console.WriteLine("121/11=" + (new Data(121) / 11) + " Ожидалось: 11");
+            Console.WriteLine("-121/11=" + (new Data(-121) / 11) + " Ожидалось: -11");
+            Console.WriteLine("121/(-11)=" + (new Data(121) / -11) + " Ожидалось: -11");
+            Console.WriteLine("-121/(-11)=" + (new Data(-121) / -11) + " Ожидалось: 11");
             Console.WriteLine((Data.Base-1) + "/" + (Data.Base-1) + "=" + (new Data((Data.Base - 1).ToString()) / (Data.Base-1)) + " Ожидалось: 1");
             Console.WriteLine((Data.Base - 2) + "/" + (Data.Base-1) + "=" + (new Data((Data.Base - 2).ToString()) / (Data.Base-1)) + "Ожидалось: 1");
             Console.WriteLine((Data.Base-1) + "/" + (Data.Base - 2) + "=" + (new Data((Data.Base-1).ToString()) / (Data.Base - 2)) + "Ожидалось: 1");
