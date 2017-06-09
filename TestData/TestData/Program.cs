@@ -212,13 +212,13 @@ namespace TestData
             Console.WriteLine("Попытка 1%0");
             try { Console.WriteLine(Data.One % new Data()); }
             catch(Exception e) { Console.WriteLine(e.Message); }
-            Console.WriteLine("0%1=" + new Data() % Data.One + " Ожидалось: 0");
+            Console.WriteLine("0%1=" + new Data() % Data.One + " Ожидалось: "+0%1);
             Console.WriteLine(Data.MaxValue + "%1=" + Data.MaxValue % Data.One + " Ожидалось: 0");
             Console.WriteLine((Data.MaxValue - Data.One) + "%" + Data.MaxValue + "=" + (Data.MaxValue - Data.One) + " Ожидалось: " + (Data.MaxValue - Data.One));
-            Console.WriteLine("120/11=" + new Data(120) % new Data(11) + " Ожидалось: 10");
-            Console.WriteLine("-120/11=" + new Data(-120) % new Data(11) + " Ожидалось: 10");
-            Console.WriteLine("120/(-11)=" + new Data(120) % new Data(-11) + " Ожидалось: 10");
-            Console.WriteLine("-120/(-11)=" + new Data(-120) % new Data(-11) + " Ожидалось: 10");
+            Console.WriteLine("120/11=" + new Data(120) % new Data(11) + " Ожидалось: "+120%11);
+            Console.WriteLine("-120/11=" + new Data(-120) % new Data(11) + " Ожидалось: "+(-120)%11);
+            Console.WriteLine("120/(-11)=" + new Data(120) % new Data(-11) + " Ожидалось: "+120%(-11));
+            Console.WriteLine("-120/(-11)=" + new Data(-120) % new Data(-11) + " Ожидалось: "+(-120)%(-11));
             Console.ReadLine();
             #endregion Тест остатка от деления
             #region Тест деления и приведения
@@ -294,6 +294,9 @@ namespace TestData
             #endregion Тест скрытых операций
             #region Переборные тесты
             #region Тесты полный перебор от -N до N
+
+            Console.WriteLine(new Data(-99) % new Data(-14));
+
             long N = 100;
             Console.Clear();
             Console.WriteLine("Тестирование действий с числами не больше " + N + "по модулю");
@@ -340,6 +343,13 @@ namespace TestData
                                 first.Add(i);
                                 second.Add(j);
                                 error.Add("/: Ожидалось:" + (i / j).ToString() + ", получили:" + res4.ToString());
+                            }
+                            Data res5 = f % s;
+                            if (res5 != new Data((i % j).ToString()))
+                            {
+                                first.Add(i);
+                                second.Add(j);
+                                error.Add("%: Ожидалось:" + i % j + " Получили:" + res5);
                             }
                         }
                     }
@@ -395,6 +405,7 @@ namespace TestData
                 }
             }
             Console.WriteLine("Количество ошибок: " + first.Count);
+            //Console.WriteLine(first[0] + " " + second[0] + " " + error[0]);
             Console.ReadLine();
             #endregion
             #region Рандомные тесты + - * /

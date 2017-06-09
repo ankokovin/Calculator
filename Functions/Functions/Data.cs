@@ -320,6 +320,7 @@ namespace Functions
         public static Data operator /(Data first, Data second)
         {
             if (second == new Data()) throw new Exception("Деление на 0");
+            if (second == Data.One) return first;
             Data right = (Abs(first.Copy()));
             if (right<MaxValue) right++;
             Data left = new Data();
@@ -328,7 +329,8 @@ namespace Functions
             Data eps = One;
             while (Abs(right-left) > eps)
             {
-                Data mid = left / 2 + right / 2 + (left.Digits[0] + right.Digits[0]) % 2;
+                Data mid = left / 2 + right / 2;
+                if (left.Digits[0] % 2 == 1 && right.Digits[0] % 2 == 1) mid++;
                 if (Abs(mid*second)<=Abs(first))
                 {
                     left = mid;
@@ -402,13 +404,7 @@ namespace Functions
         public static Data operator %(Data first, Data second)
         {
             Data del = first / second;
-            del.Plus = true;
-            Data f = first.Copy();
-            f.Plus = true;
-            Data s = second.Copy();
-            s.Plus = true;
-            Data res = f-s*del;
-            if (!res.Plus) res += s;
+            Data res = first-second*del;
             res.ZeroFix();
             return res;
         }
