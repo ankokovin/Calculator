@@ -11,7 +11,7 @@ namespace TestData
     {
         static void Main(string[] args)
         {
-            #region Основные тесты
+        #region Основные тесты
             #region Тест конструторов+Copy
             Console.WriteLine("Тест конструтора+Copy");
             Console.WriteLine("По строке");
@@ -255,7 +255,7 @@ namespace TestData
             Console.ReadLine();
             #endregion Тест деления и приведения 
             #endregion Основные тесты
-            #region Тесты скрытых операций (в классе, но не вызываемые напрямую)
+        #region Тесты скрытых операций (в классе, но не вызываемые напрямую)
             #region Тест на деление Data/int
             Console.Clear();
             Console.WriteLine("Тесты деление Data/int");
@@ -292,11 +292,8 @@ namespace TestData
             Console.ReadLine();
             #endregion Тест на деление long/Data
             #endregion Тест скрытых операций
-            #region Переборные тесты
+        #region Переборные тесты
             #region Тесты полный перебор от -N до N
-
-            Console.WriteLine(new Data(-99) % new Data(-14));
-
             long N = 100;
             Console.Clear();
             Console.WriteLine("Тестирование действий с числами не больше " + N + "по модулю");
@@ -408,7 +405,7 @@ namespace TestData
             //Console.WriteLine(first[0] + " " + second[0] + " " + error[0]);
             Console.ReadLine();
             #endregion
-            #region Рандомные тесты + - * /
+            #region Рандомные тесты + - * / %
             int NumberOfRepeats = 100000;
             int interval = 1000;
             Console.WriteLine("Рандомные тесты:  " + NumberOfRepeats);
@@ -455,6 +452,13 @@ namespace TestData
                         second.Add(b);
                         error.Add("/: Ожидалось:" + (a / b).ToString() + ", получили:" + res4.ToString());
                     }
+                    Data res5 = f % s;
+                    if (res5!=new Data((a % b).ToString()))
+                    {
+                        first.Add(a);
+                        second.Add(b);
+                        error.Add("%: Ожидалось:" + (a % b).ToString() + ", получили:" + res5.ToString());
+                    }
                 }
                 catch (Exception e)
                 {
@@ -469,7 +473,7 @@ namespace TestData
                 Console.WriteLine(first[i] + " " + second[i] + " " + error[i]);
             }
             Console.ReadLine();
-            #endregion Рандомные тесты + - * /
+            #endregion Рандомные тесты + - * / %
             #region Рандомные тесты на Divide
             int NumberOfTestDivide = 1000000;
             int IntervalForTestDivide = 1000;
@@ -503,8 +507,8 @@ namespace TestData
             Console.WriteLine("Data: " + divRes);
             Console.ReadLine();
             #endregion Рандомные тесты на Divide
-            #endregion Переборные тесты
-            #region Различные другие тесты
+        #endregion Переборные тесты
+        #region Различные другие тесты
             Console.Clear();
             Random r = new Random();
             Data[] ar = new Data[10];
