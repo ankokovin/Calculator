@@ -321,14 +321,14 @@ namespace Functions
         {
             if (second == new Data()) throw new Exception("Деление на 0");
             Data right = (Abs(first.Copy()));
-            right++;
+            if (right<MaxValue) right++;
             Data left = new Data();
             if (first == new Data()) return left;
             if (Abs(first)<Abs(second)) return left;
             Data eps = One;
             while (Abs(right-left) > eps)
             {
-                Data mid = (left + right) / 2;
+                Data mid = left / 2 + right / 2 + (left.Digits[0] + right.Digits[0]) % 2;
                 if (Abs(mid*second)<=Abs(first))
                 {
                     left = mid;

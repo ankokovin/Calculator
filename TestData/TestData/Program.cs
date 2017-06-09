@@ -200,9 +200,11 @@ namespace TestData
             Console.WriteLine("-121/11=" + (new Data(-121) / new Data(11)) + " Ожидалось: -11");
             Console.WriteLine("121/(-11)=" + (new Data(121) / new Data(-11)) + " Ожидалось: -11");
             Console.WriteLine("-121/(-11)=" + (new Data(-121) / new Data(-11)) + " Ожидалось: 11");
+            Console.WriteLine("9999999999/1=" + (new Data(9999999999) / Data.One) + " Ожидалось: 9999999999");
             Console.WriteLine("9999999999/9999999999=" + (new Data(9999999999) / new Data(9999999999)) + " Ожидалось: 1");
             Console.WriteLine("9999999999/9999999998=" + (new Data(9999999999) / new Data(9999999998)) + " Ожидалось: 1");
             Console.WriteLine("9876543210/1234567890=" + (new Data(9876543210) / new Data(1234567890)) + " Ожидалось: 8");
+            Console.WriteLine(Data.MaxValue+"/1=" + (Data.MaxValue / Data.One) + " Ожидалось: "+Data.MaxValue);
             Console.ReadLine();
             #endregion Тест цел. деления
             #region Тест остатка от деления
