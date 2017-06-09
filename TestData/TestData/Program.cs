@@ -7,22 +7,10 @@ using Functions;
 
 namespace TestData
 {
-    //09.06.17 Потенциально нерабочие тесты:
-//    1310755700 836008084 /: Ожидалось:1, получили:37500
-//655381067 226045727 /: Ожидалось:2, получили:10000
-//1469593656 1300003282 /: Ожидалось:1, получили:700
-//922847888 875092455 /: Ожидалось:1, получили:8800
-//636318600 400096509 /: Ожидалось:1, получили:75
-//1705960259 600022893 /: Ожидалось:2, получили:50
-//1860410486 400004452 /: Ожидалось:4, получили:56775
-//1742250903 1600026387 /: Ожидалось:1, получили:25
-//1638404567 952827799 /: Ожидалось:1, получили:37500
-//1572979856 1410077357 /: Ожидалось:1, получили:15000
     class Program
     {
         static void Main(string[] args)
         {
-            /*
             #region Тест конструтора+Copy
             Console.WriteLine("Тест конструтора+Copy");
             Data d1 = new Data();
@@ -237,16 +225,21 @@ namespace TestData
             #endregion Тест деления и приведения */
             #region Авто-тесты
 
-            
+               
 
             long N = 100;
+            Console.WriteLine("Тестирование действий с числами не больше " + N + "по модулю");
+            Console.ReadLine();
             List<long> first = new List<long>();
             List<long> second = new List<long>();
-            List<string> error = new List<string>();/*
-            for (long i = 0; i < N; i++)
+            List<string> error = new List<string>();
+            for (long i = -N+1; i < N; i++)
             {
-                for (long j = 1; j < N; j++)
+                Console.Clear();
+                Console.WriteLine(i);
+                for (long j = -N+1; j < N; j++)
                 {
+                    if (j == 0) j++;
                     try
                     {
                         Data f = new Data(i.ToString());
@@ -277,8 +270,6 @@ namespace TestData
                             second.Add(j);
                             error.Add("/: Ожидалось:" + (i / j).ToString() + ", получили:" + res4.ToString());
                         }
-                        Console.Clear();
-                        Console.WriteLine(i + " " + j);
                     }catch(Exception e)
                     {
                         first.Add(i);
@@ -289,33 +280,20 @@ namespace TestData
                 }
             }
             Console.WriteLine(first.Count);
-            Console.ReadLine();*/
-                                                    
-            long[] ar = { 1310755700, 836008084,
-                                                    655381067, 226045727,
-                                                    1469593656, 1300003282,
-                                                    922847888, 875092455,
-                                                    636318600, 400096509,
-                                                    1705960259, 600022893,
-                                                    1860410486, 400004452,
-                                                    1742250903, 1600026387,
-                                                    1638404567, 952827799,
-                                                    1572979856, 1410077357};
-
-            for (int i = 0; i < ar.Length / 2; i++)
-            {
-                Data d1 = new Data(ar[2 * i].ToString());
-                Data d2 = new Data(ar[2 * i + 1].ToString());
-                Data res = d1 / d2;
-                Console.WriteLine(new Data((ar[2 * i] / ar[2 * i + 1]).ToString()) == res);
-            }
-
-
+            Console.WriteLine(first[0] + " " + second[0] + " " + error[0]);
             Console.ReadLine();
-            int NumberOfRepeats = 30000;
+            int NumberOfRepeats = 100000;
+            int interval = 1000;
+            Console.WriteLine("Рандомные тесты:  " + NumberOfRepeats);
+            Console.ReadLine();
             Random rnd = new Random();
             for (int i = 0; i < NumberOfRepeats; i++)
             {
+                if (i % interval == 0)
+                {
+                    Console.Clear();
+                    Console.WriteLine(i);
+                }
                 long a = rnd.Next();
                 long b = rnd.Next();
                 try
@@ -350,8 +328,6 @@ namespace TestData
                         second.Add(b);
                         error.Add("/: Ожидалось:" + (a / b).ToString() + ", получили:" + res4.ToString());
                     }
-                    Console.Clear();
-                    Console.WriteLine(i);
                 }
                 catch (Exception e)
                 {

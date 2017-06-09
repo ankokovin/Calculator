@@ -73,6 +73,7 @@ namespace Functions
                 Input=Input.Remove(Input.Length - 5);
             }
             Digits[count]= int.Parse(Input);
+            ZeroFix();
         }
         #region Операторы сравнения
         public static bool operator < (Data first, Data second)
@@ -148,6 +149,16 @@ namespace Functions
                 return new Data("1");
             }
         }
+        /// <summary>
+        /// Представление минус нуля
+        /// </summary>
+        static Data NegZero
+        {
+            get
+            {
+                return new Data("-0");
+            }
+        }
         /*          Сложение
          *  Возможные случаи:
          *      1) Одинаковые знаки -> Выполняется обычное сложение, знак результата = знак входных чисел
@@ -199,6 +210,7 @@ namespace Functions
                     if (count == N) throw new Exception("Результат вышел за пределы 25 знаков.");
                     result.Digits[count] = reminder;
                 }
+                result.ZeroFix();
                 return result;
             }
         }
@@ -249,6 +261,7 @@ namespace Functions
                     result.Digits[i] += Base;
                 }
             }
+            result.ZeroFix();
             return result;
         }
         //Умножение - обычное, столбиком
@@ -282,6 +295,7 @@ namespace Functions
                     result = result + tempRes;
                 }
                 result.Plus = !(first.Plus ^ second.Plus);
+                result.ZeroFix();
                 return result;
             } 
             catch (IndexOutOfRangeException) { throw new Exception("Результат вышел за пределы 25 знаков"); }
@@ -325,6 +339,7 @@ namespace Functions
                     right = mid;
                 }
             }
+            left.ZeroFix();
            return left;
         }
         //Целочисленное деление на короткое число
@@ -346,6 +361,7 @@ namespace Functions
                 result.Digits[i] /= div;
             }
             if ((double)reminder / div > 0.5) result++;
+            result.ZeroFix();
                 return result;
         }
         //Деление короткого на длинное
@@ -396,6 +412,7 @@ namespace Functions
             s.Plus = true;
             Data res = f-s*del;
             if (!res.Plus) res += s;
+            res.ZeroFix();
             return res;
         }
         //Приведение
@@ -425,7 +442,16 @@ namespace Functions
                 if (Divide(middle, One) < input) left = middle;
                 else right = middle;
             }
-            return (left + right) / 2;
+            Data result = (left + right) / 2;
+            result.ZeroFix();
+            return result;
+        }
+        /// <summary>
+        /// Костыль для удаления минуса у нуля
+        /// </summary>
+        void ZeroFix()
+        {
+            if (this == NegZero) Plus = true;
         }
         public override string ToString()
         {
