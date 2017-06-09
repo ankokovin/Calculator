@@ -156,7 +156,9 @@ namespace Functions
         {
             get
             {
-                return new Data("-0");
+                Data res = new Data();
+                res.Plus = false;
+                return res;
             }
         }
         /*          Сложение
