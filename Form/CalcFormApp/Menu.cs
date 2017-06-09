@@ -6,11 +6,19 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-
+using Functions;
+    
 namespace CalcFormApp
 {
     public partial class Menu : Form
     {
+        #region Data Storage
+        Data memory = new Data();               //хранит последнее записанное число после нажатия =
+        Data operatorMemory = null;      //хранит число записанное в строке после нажатия операции +,-,*,/ и тд
+        string error = "";
+        string lastOperand = "";
+        #endregion
+
         #region Basic Setup
         public Menu()
         {
@@ -25,27 +33,94 @@ namespace CalcFormApp
         #region Functions
         private void EqualsSomething_Click(object sender, EventArgs e)
         {
+            if (outputInfo.Text == "")
+                MessageBox.Show("Введите число в строку используя клавиатуру или мышь");
+            else
+            {
+                if (lastOperand != "")
+                {
+                    if (lastOperand == "+")
+                        operatorMemory = Calculator.Sum(operatorMemory, new Data(outputInfo.Text), out error);
+                    if (lastOperand == "-")
+                        operatorMemory = Calculator.Dif(operatorMemory, new Data(outputInfo.Text), out error);
+                    if (lastOperand == "*")
+                        operatorMemory = Calculator.Multiply(operatorMemory, new Data(outputInfo.Text), out error);
+                    if (lastOperand == "/")
+                        operatorMemory = Calculator.Divide(operatorMemory, new Data(outputInfo.Text), out error);
+                    if (lastOperand == "Div")
+                        operatorMemory = Calculator.IntDivide(operatorMemory, new Data(outputInfo.Text), out error);
 
+                    memory = operatorMemory;
+                    operatorMemory = null;
+                    lastOperand = "";
+                }
+                else
+                    memory = 0;
+                outputInfo.Text = memory.ToString();
+            }
         }
         private void Plus_Click(object sender, EventArgs e)
         {
-
+            if (outputInfo.Text == "")
+                MessageBox.Show("Введите число в строку используя клавиатуру или мышь");
+            else
+            {
+                if ((object)operatorMemory == null)
+                    operatorMemory = new Data(outputInfo.Text);
+                else
+                    operatorMemory = Calculator.Sum(operatorMemory, new Data(outputInfo.Text), out error);
+                outputInfo.Text = "";
+                Dialog.ShowErrorMessage(error);
+                error = "";
+            }
+            lastOperand = "+";
         }
         private void Clear_Click(object sender, EventArgs e)
         {
+            memory = 0;
+            operatorMemory = 0;
+            error = "";
+            lastOperand = "";
 
         }
         private void Multiply_Click(object sender, EventArgs e)
         {
-
+            if (outputInfo.Text == "")
+                MessageBox.Show("Введите число в строку используя клавиатуру или мышь");
+            else
+            {
+               
+                outputInfo.Text = "";
+                Dialog.ShowErrorMessage(error);
+                error = "";
+            }
+            lastOperand = "*";
         }
         private void DivideInt_Click(object sender, EventArgs e)
         {
-
+            if (outputInfo.Text == "")
+                MessageBox.Show("Введите число в строку используя клавиатуру или мышь");
+            else
+            {
+                operatorMemory = Calculator.IntDivide(operatorMemory, new Data(outputInfo.Text), out error);
+                outputInfo.Text = "";
+                Dialog.ShowErrorMessage(error);
+                error = "";
+            }
+            lastOperand = "Div";
         }
         private void Minus_Click(object sender, EventArgs e)
         {
-
+            if (outputInfo.Text == "")
+                MessageBox.Show("Введите число в строку используя клавиатуру или мышь");
+            else
+            {
+                operatorMemory = Calculator.Dif(operatorMemory, new Data(outputInfo.Text), out error);
+                outputInfo.Text = "";
+                Dialog.ShowErrorMessage(error);
+                error = "";
+            }
+            lastOperand = "-";
         }
         private void Previous_Click(object sender, EventArgs e)
         {
@@ -57,7 +132,16 @@ namespace CalcFormApp
         }
         private void DivideFloat_Click(object sender, EventArgs e)
         {
-
+            if (outputInfo.Text == "")
+                MessageBox.Show("Введите число в строку используя клавиатуру или мышь");
+            else
+            {
+                operatorMemory = Calculator.Divide(operatorMemory, new Data(outputInfo.Text), out error);
+                outputInfo.Text = "";
+                Dialog.ShowErrorMessage(error);
+                error = "";
+            }
+            lastOperand = "/";
         }
         private void PlusMinus_Click(object sender, EventArgs e)
         {
@@ -74,6 +158,10 @@ namespace CalcFormApp
                         outputInfo.Text = outputInfo.Text + arr[i];
                 }
             }
+        }
+        private void ShowMemory_Click(object sender, EventArgs e)
+        {
+            outputInfo.Text = memory.ToString();
         }
         #endregion
 
@@ -113,6 +201,11 @@ namespace CalcFormApp
         {
             ToolTip info = new ToolTip();
             info.SetToolTip(DivideFloat, "Деление с дробной частью");
+        }
+        private void ShowMemory_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip info = new ToolTip();
+            info.SetToolTip(DivideFloat, "Показать сохранённое число");
         }
         #endregion
         #endregion
@@ -188,7 +281,11 @@ namespace CalcFormApp
             }
         }
 
+
         #endregion
+
         #endregion
+
+        
     }
 }
