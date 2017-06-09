@@ -10,7 +10,7 @@ namespace Functions
     /// Непосредственно хранит длинные числа и содержит реализацию функций сложения, вычитания, умножения, целочисленного и нет деления
     /// Способ хранения: массив из <see cref="N"/> разрядов <see cref="Base"/>-ичной системы исчисления типа <see cref="long"/>
     /// </summary>
-    public class Data : ICloneable
+    public class Data : ICloneable, IComparable
     {
         #region Константы и свойства
         /// <summary>
@@ -503,6 +503,27 @@ namespace Functions
             long Hash = 0;
             for (int i = 0; i < Digits.Length; i++) Hash += Digits[i].GetHashCode();
             return (int)Hash;
+        }
+        /// <summary>
+        /// Стандартная функция сравнения объектов интерфейса IComparable
+        /// </summary>
+        /// <param name="obj">Объект сравнения</param>
+        /// <returns><para>Результат сравнения:</para>
+        /// <para>Меньше нуля        Данный экземпляр предшествует параметру obj в порядке сортировки.</para>
+        /// <para>Нуль  Этот экземпляр выполняется в той же позиции в порядке сортировки, что obj.</para>
+        /// <para>Больше нуля Данный экземпляр следует за параметром obj в порядке сортировки.</para></returns>
+        public int CompareTo(object obj)
+        {
+            if (obj is Data)
+            {
+                Data temp = obj as Data;
+                if (this > temp) return 1;
+                if (this == temp) return 0;
+                return -1;
+            } else
+            {
+                throw new ArgumentException();
+            }
         }
         #endregion Различные прочие функции
     }
