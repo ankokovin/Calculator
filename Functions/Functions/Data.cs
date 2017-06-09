@@ -323,18 +323,15 @@ namespace Functions
         public static Data operator /(Data first, Data second)
         {
             if (second == new Data()) throw new Exception("Деление на 0");
-            Data right = first.Copy();
+            Data right = Abs(first.Copy())++;
             Data left = new Data();
-            left.Plus= !(first.Plus ^ second.Plus);
-            right.Plus = left.Plus;
-            right++;
             if (first == new Data()) return left;
             if (Abs(first)<Abs(second)) return left;
             Data eps = One;
             while (Abs(right-left) > eps)
             {
                 Data mid = (left + right) / 2;
-                if (mid*second<=first)
+                if (Abs(mid*second)<=Abs(first))
                 {
                     left = mid;
                 } else
@@ -342,6 +339,7 @@ namespace Functions
                     right = mid;
                 }
             }
+            left.Plus = !(first.Plus ^ second.Plus);
             left.ZeroFix();
            return left;
         }
