@@ -4,18 +4,15 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-/*
- * Написанные операции: + -  * / /цел %
- */
-
 namespace Functions
 {
     /// <summary>
     /// Непосредственно хранит длинные числа и содержит реализацию функций сложения, вычитания, умножения, целочисленного и нет деления
     /// Способ хранения: массив из <see cref="N"/> разрядов <see cref="Base"/>-ичной системы исчисления типа <see cref="long"/>
     /// </summary>
-    public class Data
+    public class Data : ICloneable
     {
+        #region Константы и свойства
         /// <summary>
         /// Количество используемых разрядов
         /// </summary>
@@ -43,6 +40,40 @@ namespace Functions
         /// Основание СИ
         /// </summary>
         const int Base = 100000;
+        /// <summary>
+        /// Самое большое возможное число типа  <see cref="Data"/> 
+        /// </summary>
+        public static Data MaxValue
+        {
+            get
+            {
+                return new Data("9999999999999999999999999");
+            }
+        }
+        /// <summary>
+        /// Представление единицы в число типа  <see cref="Data"/> 
+        /// </summary>
+        public static Data One
+        {
+            get
+            {
+                return new Data("1");
+            }
+        }
+        /// <summary>
+        /// Представление минус нуля
+        /// </summary>
+        static Data NegZero
+        {
+            get
+            {
+                Data res = new Data();
+                res.Plus = false;
+                return res;
+            }
+        }
+        #endregion Константы и свойства
+        #region Конструкторы
         /// <summary>
         /// Инициализация числа 0 типа <see cref="Data"/>
         /// </summary>
@@ -75,6 +106,7 @@ namespace Functions
             Digits[count]= int.Parse(Input);
             ZeroFix();
         }
+        #endregion Конструкторы
         #region Операторы сравнения
         public static bool operator < (Data first, Data second)
         {
@@ -118,49 +150,7 @@ namespace Functions
             return !(first > second);
         }
         #endregion Операторы сравнения
-        /// <summary>
-        /// Глубокое копирование данного числа  <see cref="Data"/> 
-        /// </summary>
-        /// <returns>Копия данного числа типа  <see cref="Data"/> </returns>
-        public Data Copy()
-        {
-            Data result = new Data();
-            for (int i = 0; i < Digits.Length; i++) result.Digits[i] = Digits[i];
-            result.Plus = Plus;
-            return result;
-        }
-        /// <summary>
-        /// Самое большое возможное число типа  <see cref="Data"/> 
-        /// </summary>
-        public static Data MaxValue
-        {
-            get
-            {
-                return new Data("9999999999999999999999999");
-            }
-        }
-        /// <summary>
-        /// Представление единицы в число типа  <see cref="Data"/> 
-        /// </summary>
-        public static Data One
-        {
-            get
-            {
-                return new Data("1");
-            }
-        }
-        /// <summary>
-        /// Представление минус нуля
-        /// </summary>
-        static Data NegZero
-        {
-            get
-            {
-                Data res = new Data();
-                res.Plus = false;
-                return res;
-            }
-        }
+        #region Арифметические действия
         /*          Сложение
          *  Возможные случаи:
          *      1) Одинаковые знаки -> Выполняется обычное сложение, знак результата = знак входных чисел
@@ -168,13 +158,13 @@ namespace Functions
          *          a+b = a-(-b) = b-(-a)
          *          Наименьший следует использовать в качестве вычитаемого!
          * 
-         */ 
-         /// <summary>
-         /// Сложение двух чисел типа <see cref="Data"/>
-         /// </summary>
-         /// <param name="first">Первое слагаемое типа <see cref="Data"/></param>
-         /// <param name="second">Второе слагаемое типа <see cref="Data"/></param>
-         /// <returns>Сумма слагаемых типа <see cref="Data"/></returns>
+         */
+        /// <summary>
+        /// Сложение двух чисел типа <see cref="Data"/>
+        /// </summary>
+        /// <param name="first">Первое слагаемое типа <see cref="Data"/></param>
+        /// <param name="second">Второе слагаемое типа <see cref="Data"/></param>
+        /// <returns>Сумма слагаемых типа <see cref="Data"/></returns>
         public static Data operator + (Data first, Data second)
         {
             if (first.Plus != second.Plus)//если числа разных знаков, то следует юзать разность
@@ -239,7 +229,7 @@ namespace Functions
          *          2) Разные знаки -> Свести к сложению
          *               a-b=a+(-b)
          */
-         /// <summary>
+        /// <summary>
          /// Вычитание двух чисел типа <see cref="Data"/>
          /// </summary>
          /// <param name="first">Уменьшаемое типа <see cref="Data"/></param>
@@ -313,7 +303,6 @@ namespace Functions
             result.Plus = true;
             return result;
         }
-        //Целочисленное деление длинных
         /// <summary>
         /// Целочисленное деление чисел типа <see cref="Data"/>
         /// </summary>
@@ -344,7 +333,6 @@ namespace Functions
             left.ZeroFix();
            return left;
         }
-        //Целочисленное деление на короткое число
         /// <summary>
         /// Целочисленное деление числа типа <see cref="Data"/> на число типа <see cref="int"/>
         /// </summary>
@@ -366,7 +354,6 @@ namespace Functions
             result.ZeroFix();
                 return result;
         }
-        //Деление короткого на длинное
         /// <summary>
         /// Целочисленное деление числа типа <see cref="long"/> на число типа <see cref="Data"/>
         /// </summary>
@@ -379,7 +366,6 @@ namespace Functions
             for (int i = 0; i < second.Count; i++) div += second.Digits[i] * Math.Pow(Base, i);
             return first / div;
         }
-        //Деление длинных
         /// <summary>
         /// Деление (нецелочисленное) чисел типа  <see cref="Data"/> 
         /// </summary>
@@ -397,7 +383,6 @@ namespace Functions
             if (first.Plus ^ second.Plus) result *= -1;
             return result;
         }
-        //Остаток от деления
         /// <summary>
         /// Остаток от деления двух чисел типа <see cref="Data"/>
         /// </summary>
@@ -417,7 +402,6 @@ namespace Functions
             res.ZeroFix();
             return res;
         }
-        //Приведение
         /// <summary>
         /// Неявное приведение числа типа <see cref="double"/> к числу типа <see cref="Data"/>
         /// Работает точно при относительно небольших числах
@@ -448,6 +432,8 @@ namespace Functions
             result.ZeroFix();
             return result;
         }
+        #endregion Действия
+        #region Различные прочие функции
         /// <summary>
         /// Костыль для удаления минуса у нуля
         /// </summary>
@@ -455,6 +441,29 @@ namespace Functions
         {
             if (this == NegZero) Plus = true;
         }
+        /// <summary>
+        /// Глубокое копирование данного числа  <see cref="Data"/> 
+        /// </summary>
+        /// <returns>Копия данного числа типа  <see cref="Data"/> </returns>
+        public Data Copy()
+        {
+            Data result = new Data();
+            for (int i = 0; i < Digits.Length; i++) result.Digits[i] = Digits[i];
+            result.Plus = Plus;
+            return result;
+        }
+        /// <summary>
+        /// Функция колирования из интерфеса IClonable
+        /// </summary>
+        /// <returns>Клон данного объекта типа <see cref="Data"/>, представленный как <see cref="object"/></returns>
+        public object Clone()
+        {
+            return Copy();
+        }
+        /// <summary>
+        /// Стандартная функция строкового представления объекта
+        /// </summary>
+        /// <returns>Строка <see cref="string"/>, представляющая данный объект <see cref="Data"/></returns>
         public override string ToString()
         {
             string result=Digits[Count-1].ToString();
@@ -471,6 +480,11 @@ namespace Functions
             }
             return result;
         }
+        /// <summary>
+        /// Стандартная функция сравнения объектов
+        /// </summary>
+        /// <param name="obj">Объект сравнения</param>
+        /// <returns>Результат сравнения типа <see cref="bool"/></returns>
         public override bool Equals(object obj)
         {
             if (obj is Data)
@@ -480,11 +494,16 @@ namespace Functions
             }
             return false;
         }
+        /// <summary>
+        /// Стандартная функция получения хэш-кода объекта
+        /// </summary>
+        /// <returns>Хэш-код данного объекта <see cref="Data"/> в виде числа <see cref="int"/></returns>
         public override int GetHashCode()
         {
             long Hash = 0;
             for (int i = 0; i < Digits.Length; i++) Hash += Digits[i].GetHashCode();
             return (int)Hash;
         }
+        #endregion Различные прочие функции
     }
 }
