@@ -268,7 +268,8 @@ namespace Functions
                 {
                     Data tempRes = new Data();
                     long reminder = 0;
-                    for (int j = 0; j < first.Count; j++)
+                    int j;
+                    for ( j= 0; j < first.Count; j++)
                     {
                         tempRes.Digits[i + j] = first.Digits[j] * second.Digits[i] + reminder;
                         reminder = tempRes.Digits[i + j] / Base;
@@ -276,7 +277,7 @@ namespace Functions
                     }
                     if (reminder > 0)
                     {
-                        tempRes.Digits[tempRes.Count] = reminder;
+                        tempRes.Digits[i+j] = reminder;
                     }
                     result = result + tempRes;
                 }
