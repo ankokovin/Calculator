@@ -61,10 +61,12 @@ namespace CalcFormApp
                     memory = 0;
                     outputInfo.Text = memory.ToString();
                 }
+                Dialog.ShowErrorMessage(error);
             }
         }
         private void Plus_Click(object sender, EventArgs e)
         {
+            error = "";
             try
             {
                 if (Dialog.OperatorCheck(lastOperand, ref operatorMemory, outputInfo.Text, out error))
@@ -82,13 +84,12 @@ namespace CalcFormApp
                     else
                         operatorMemory = Calculator.Sum(operatorMemory, new Data(outputInfo.Text), out error);
                     outputInfo.Text = "";
-                    error = "";
                     lastOperand = "+";
                 }
             }
             catch (Exception errorInfo)
             {
-                error = errorInfo.ToString();
+                error = errorInfo.Message;
             }
             Dialog.ShowErrorMessage(error);
         }
@@ -102,6 +103,7 @@ namespace CalcFormApp
         }
         private void Multiply_Click(object sender, EventArgs e)
         {
+            error = "";
             try
             {
                 if (Dialog.OperatorCheck(lastOperand, ref operatorMemory, outputInfo.Text, out error))
@@ -119,18 +121,19 @@ namespace CalcFormApp
                     else
                         operatorMemory = Calculator.Multiply(operatorMemory, new Data(outputInfo.Text), out error);
                     outputInfo.Text = "";
-                    error = "";
                     lastOperand = "*";
                 }
             }
             catch (Exception errorInfo)
             {
-                error = errorInfo.ToString();
+                error = errorInfo.Message;
             }
             Dialog.ShowErrorMessage(error);
         }
         private void DivideInt_Click(object sender, EventArgs e)
         {
+
+            error = "";
             try
             {
                 if (Dialog.OperatorCheck(lastOperand, ref operatorMemory, outputInfo.Text, out error))
@@ -148,19 +151,19 @@ namespace CalcFormApp
                     else
                         operatorMemory = Calculator.IntDivide(operatorMemory, new Data(outputInfo.Text), out error);
                     outputInfo.Text = "";
-                    error = "";
                     lastOperand = "Div";
                 }
             }
             catch (Exception errorInfo)
             {
-                error = errorInfo.ToString();
+                error = errorInfo.Message;
             }
 
             Dialog.ShowErrorMessage(error);
         }
         private void Minus_Click(object sender, EventArgs e)
         {
+            error = "";
             try
             {
                 if (Dialog.OperatorCheck(lastOperand, ref operatorMemory, outputInfo.Text, out error))
@@ -178,23 +181,32 @@ namespace CalcFormApp
                     else
                         operatorMemory = Calculator.Dif(operatorMemory, new Data(outputInfo.Text), out error);
                     outputInfo.Text = "";
-                    error = "";
                     lastOperand = "-";
                 }
             }
             catch (Exception errorInfo)
             {
-                error = errorInfo.ToString();
+                error = errorInfo.Message;
             }
 
             Dialog.ShowErrorMessage(error);
         }
         private void Previous_Click(object sender, EventArgs e)
         {
-
+            error = "";
+            try
+            {
+                outputInfo.Text = Calculator.operationsResults.Pop().ToString();
+            }
+            catch(Exception)
+            {
+                error = "Представленно самое первое вычисление";
+            }
+            Dialog.ShowErrorMessage(error);
         }
         private void Rest_Click(object sender, EventArgs e)
         {
+            error = "";
             try
             {
                 if (Dialog.OperatorCheck(lastOperand, ref operatorMemory, outputInfo.Text, out error))
@@ -212,18 +224,18 @@ namespace CalcFormApp
                     else
                         operatorMemory = Calculator.Mod(operatorMemory, new Data(outputInfo.Text), out error);
                     outputInfo.Text = "";
-                    error = "";
                     lastOperand = "%";
                 }
             }
             catch (Exception errorInfo)
             {
-                error = errorInfo.ToString();
+                error = errorInfo.Message;
             }
             Dialog.ShowErrorMessage(error);
         }
         private void DivideFloat_Click(object sender, EventArgs e)
         {
+            error = "";
             try
             {
                 if (Dialog.OperatorCheck(lastOperand, ref operatorMemory, outputInfo.Text, out error))
@@ -242,13 +254,12 @@ namespace CalcFormApp
                     else
                         operatorMemory = Calculator.Divide(operatorMemory, new Data(outputInfo.Text), out error);
                     outputInfo.Text = "";
-                    error = "";
                     lastOperand = "/";
                 }
             }
             catch (Exception errorInfo)
             {
-                error = errorInfo.ToString();
+                error = errorInfo.Message;
             }
             Dialog.ShowErrorMessage(error);
         }
