@@ -39,88 +39,158 @@ namespace CalcFormApp
             {
                 if (lastOperand != "")
                 {
-                    if (lastOperand == "+")
-                        operatorMemory = Calculator.Sum(operatorMemory, new Data(outputInfo.Text), out error);
-                    if (lastOperand == "-")
-                        operatorMemory = Calculator.Dif(operatorMemory, new Data(outputInfo.Text), out error);
-                    if (lastOperand == "*")
-                        operatorMemory = Calculator.Multiply(operatorMemory, new Data(outputInfo.Text), out error);
                     if (lastOperand == "/")
-                        operatorMemory = Calculator.Divide(operatorMemory, new Data(outputInfo.Text), out error);
-                    if (lastOperand == "Div")
-                        operatorMemory = Calculator.IntDivide(operatorMemory, new Data(outputInfo.Text), out error);
-
-                    memory = operatorMemory;
-                    operatorMemory = null;
-                    lastOperand = "";
+                    {
+                        double temp = Calculator.Divide(operatorMemory, new Data(outputInfo.Text), out error);
+                        outputInfo.Text = temp.ToString();
+                        memory = operatorMemory;
+                        operatorMemory = null;
+                        lastOperand = "";
+                    }
+                    else
+                    {
+                        Dialog.OperatorCheck(lastOperand, ref operatorMemory, outputInfo.Text, out error);
+                        memory = operatorMemory;
+                        operatorMemory = null;
+                        lastOperand = "";
+                        outputInfo.Text = memory.ToString();
+                    }
                 }
                 else
+                {
                     memory = 0;
-                outputInfo.Text = memory.ToString();
+                    outputInfo.Text = memory.ToString();
+                }
             }
         }
         private void Plus_Click(object sender, EventArgs e)
         {
-            if (outputInfo.Text == "")
-                MessageBox.Show("Введите число в строку используя клавиатуру или мышь");
-            else
+            try
             {
-                if ((object)operatorMemory == null)
-                    operatorMemory = new Data(outputInfo.Text);
+                if (Dialog.OperatorCheck(lastOperand, ref operatorMemory, outputInfo.Text, out error))
+                {
+                    outputInfo.Text = "";
+                    lastOperand = "+";
+                }
                 else
-                    operatorMemory = Calculator.Sum(operatorMemory, new Data(outputInfo.Text), out error);
-                outputInfo.Text = "";
-                Dialog.ShowErrorMessage(error);
-                error = "";
+                if (outputInfo.Text == "")
+                    MessageBox.Show("Введите число в строку используя клавиатуру или мышь");
+                else
+                {
+                    if ((object)operatorMemory == null)
+                        operatorMemory = new Data(outputInfo.Text);
+                    else
+                        operatorMemory = Calculator.Sum(operatorMemory, new Data(outputInfo.Text), out error);
+                    outputInfo.Text = "";
+                    error = "";
+                    lastOperand = "+";
+                }
             }
-            lastOperand = "+";
+            catch (Exception errorInfo)
+            {
+                error = errorInfo.ToString();
+            }
+            Dialog.ShowErrorMessage(error);
         }
         private void Clear_Click(object sender, EventArgs e)
         {
-            memory = 0;
-            operatorMemory = 0;
+            memory = new Data();
+            operatorMemory = null;
             error = "";
             lastOperand = "";
-
+            outputInfo.Text = "";
         }
         private void Multiply_Click(object sender, EventArgs e)
         {
-            if (outputInfo.Text == "")
-                MessageBox.Show("Введите число в строку используя клавиатуру или мышь");
-            else
+            try
             {
-               
-                outputInfo.Text = "";
-                Dialog.ShowErrorMessage(error);
-                error = "";
+                if (Dialog.OperatorCheck(lastOperand, ref operatorMemory, outputInfo.Text, out error))
+                {
+                    outputInfo.Text = "";
+                    lastOperand = "*";
+                }
+                else
+                if (outputInfo.Text == "")
+                    MessageBox.Show("Введите число в строку используя клавиатуру или мышь");
+                else
+                {
+                    if ((object)operatorMemory == null)
+                        operatorMemory = new Data(outputInfo.Text);
+                    else
+                        operatorMemory = Calculator.Multiply(operatorMemory, new Data(outputInfo.Text), out error);
+                    outputInfo.Text = "";
+                    error = "";
+                    lastOperand = "*";
+                }
             }
-            lastOperand = "*";
+            catch (Exception errorInfo)
+            {
+                error = errorInfo.ToString();
+            }
+            Dialog.ShowErrorMessage(error);
         }
+
+        //Пока используется деление с нецелой частью и приводится к целому числу !При изменении также просмотреть Dialog.cs
         private void DivideInt_Click(object sender, EventArgs e)
         {
-            if (outputInfo.Text == "")
-                MessageBox.Show("Введите число в строку используя клавиатуру или мышь");
-            else
+            try
             {
-                operatorMemory = Calculator.IntDivide(operatorMemory, new Data(outputInfo.Text), out error);
-                outputInfo.Text = "";
-                Dialog.ShowErrorMessage(error);
-                error = "";
+                if (Dialog.OperatorCheck(lastOperand, ref operatorMemory, outputInfo.Text, out error))
+                {
+                    outputInfo.Text = "";
+                    lastOperand = "Div";
+                }
+                else
+                if (outputInfo.Text == "")
+                    MessageBox.Show("Введите число в строку используя клавиатуру или мышь");
+                else
+                {
+                    if ((object)operatorMemory == null)
+                        operatorMemory = new Data(outputInfo.Text);
+                    else
+                        operatorMemory = Calculator.Divide(operatorMemory, new Data(outputInfo.Text), out error);
+                    outputInfo.Text = "";
+                    error = "";
+                    lastOperand = "Div";
+                }
             }
-            lastOperand = "Div";
+            catch (Exception errorInfo)
+            {
+                error = errorInfo.ToString();
+            }
+
+            Dialog.ShowErrorMessage(error);
         }
+
         private void Minus_Click(object sender, EventArgs e)
         {
-            if (outputInfo.Text == "")
-                MessageBox.Show("Введите число в строку используя клавиатуру или мышь");
-            else
+            try
             {
-                operatorMemory = Calculator.Dif(operatorMemory, new Data(outputInfo.Text), out error);
-                outputInfo.Text = "";
-                Dialog.ShowErrorMessage(error);
-                error = "";
+                if (Dialog.OperatorCheck(lastOperand, ref operatorMemory, outputInfo.Text, out error))
+                {
+                    outputInfo.Text = "";
+                    lastOperand = "-";
+                }
+                else
+                if (outputInfo.Text == "")
+                    MessageBox.Show("Введите число в строку используя клавиатуру или мышь");
+                else
+                {
+                    if ((object)operatorMemory == null)
+                        operatorMemory = new Data(outputInfo.Text);
+                    else
+                        operatorMemory = Calculator.Dif(operatorMemory, new Data(outputInfo.Text), out error);
+                    outputInfo.Text = "";
+                    error = "";
+                    lastOperand = "-";
+                }
             }
-            lastOperand = "-";
+            catch (Exception errorInfo)
+            {
+                error = errorInfo.ToString();
+            }
+
+            Dialog.ShowErrorMessage(error);
         }
         private void Previous_Click(object sender, EventArgs e)
         {
@@ -128,20 +198,62 @@ namespace CalcFormApp
         }
         private void Rest_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                if (Dialog.OperatorCheck(lastOperand, ref operatorMemory, outputInfo.Text, out error))
+                {
+                    outputInfo.Text = "";
+                    lastOperand = "%";
+                }
+                else
+                if (outputInfo.Text == "")
+                    MessageBox.Show("Введите число в строку используя клавиатуру или мышь");
+                else
+                {
+                    if ((object)operatorMemory == null)
+                        operatorMemory = new Data(outputInfo.Text);
+                    else
+                        operatorMemory = Calculator.Mod(operatorMemory, new Data(outputInfo.Text), out error);
+                    outputInfo.Text = "";
+                    error = "";
+                    lastOperand = "%";
+                }
+            }
+            catch (Exception errorInfo)
+            {
+                error = errorInfo.ToString();
+            }
+            Dialog.ShowErrorMessage(error);
         }
         private void DivideFloat_Click(object sender, EventArgs e)
         {
-            if (outputInfo.Text == "")
-                MessageBox.Show("Введите число в строку используя клавиатуру или мышь");
-            else
+            try
             {
-                operatorMemory = Calculator.Divide(operatorMemory, new Data(outputInfo.Text), out error);
-                outputInfo.Text = "";
-                Dialog.ShowErrorMessage(error);
-                error = "";
+                if (Dialog.OperatorCheck(lastOperand, ref operatorMemory, outputInfo.Text, out error))
+                {
+                    outputInfo.Text = "";
+                    lastOperand = "/";
+                }
+                else
+                if (outputInfo.Text == "")
+                    MessageBox.Show("Введите число в строку используя клавиатуру или мышь");
+                else
+                {
+
+                    if ((object)operatorMemory == null)
+                        operatorMemory = new Data(outputInfo.Text);
+                    else
+                        operatorMemory = Calculator.Divide(operatorMemory, new Data(outputInfo.Text), out error);
+                    outputInfo.Text = "";
+                    error = "";
+                    lastOperand = "/";
+                }
             }
-            lastOperand = "/";
+            catch (Exception errorInfo)
+            {
+                error = errorInfo.ToString();
+            }
+            Dialog.ShowErrorMessage(error);
         }
         private void PlusMinus_Click(object sender, EventArgs e)
         {
@@ -158,10 +270,6 @@ namespace CalcFormApp
                         outputInfo.Text = outputInfo.Text + arr[i];
                 }
             }
-        }
-        private void ShowMemory_Click(object sender, EventArgs e)
-        {
-            outputInfo.Text = memory.ToString();
         }
         #endregion
 

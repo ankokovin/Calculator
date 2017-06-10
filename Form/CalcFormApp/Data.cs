@@ -399,25 +399,7 @@ namespace Functions
         /// <param name="input"></param>
         public static implicit operator Data(double input)
         {
-            if (input < long.MaxValue)
-            {
-                long l = (long)Math.Ceiling(input);
-                if (Math.Abs(l / input - 1) > Math.Abs((l - 1) / input - 1)) l--;
-                return new Data(l.ToString());
-            }
-            int maxBase = 0;
-            while (input > Math.Pow(Base, maxBase)) maxBase++;
-            if (maxBase > N) throw new Exception("Неожиданно большое число");
-            Data left = new Data();
-            Data right = MaxValue;
-            while (Abs(left-right)>One)
-            {
-                Data middle = left/2 + right/2;
-                if (Divide(middle, One) == input) return middle;
-                if (Divide(middle, One) < input) left = middle;
-                else right = middle;
-            }
-            return (left + right) / 2;
+            return new Data(Math.Floor(input).ToString());
         }
         public override string ToString()
         {
