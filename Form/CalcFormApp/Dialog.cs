@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Functions;
+
 namespace CalcFormApp
 {
     class Dialog
@@ -36,7 +37,7 @@ namespace CalcFormApp
                 if (lastOperand == "%")
                     operatorMemory = Calculator.Mod(operatorMemory, new Data(num), out error);
                 if (lastOperand == "Div")
-                    operatorMemory = Calculator.Divide(operatorMemory, new Data(num), out error);
+                    operatorMemory = Calculator.IntDivide(operatorMemory, new Data(num), out error);
                 return true;
             }
             return false;

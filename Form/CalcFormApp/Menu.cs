@@ -129,8 +129,6 @@ namespace CalcFormApp
             }
             Dialog.ShowErrorMessage(error);
         }
-
-        //Пока используется деление с нецелой частью и приводится к целому числу !При изменении также просмотреть Dialog.cs
         private void DivideInt_Click(object sender, EventArgs e)
         {
             try
@@ -148,7 +146,7 @@ namespace CalcFormApp
                     if ((object)operatorMemory == null)
                         operatorMemory = new Data(outputInfo.Text);
                     else
-                        operatorMemory = Calculator.Divide(operatorMemory, new Data(outputInfo.Text), out error);
+                        operatorMemory = Calculator.IntDivide(operatorMemory, new Data(outputInfo.Text), out error);
                     outputInfo.Text = "";
                     error = "";
                     lastOperand = "Div";
@@ -161,7 +159,6 @@ namespace CalcFormApp
 
             Dialog.ShowErrorMessage(error);
         }
-
         private void Minus_Click(object sender, EventArgs e)
         {
             try
