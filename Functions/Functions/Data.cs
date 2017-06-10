@@ -259,6 +259,9 @@ namespace Functions
                 {
                     reminder = 1;
                     result.Digits[i] += Base;
+                }else
+                {
+                    reminder = 0;
                 }
             }
             result.ZeroFix();
