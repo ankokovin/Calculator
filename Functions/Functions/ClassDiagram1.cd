@@ -3,9 +3,10 @@
   <Class Name="Functions.Data" Collapsed="true">
     <Position X="3" Y="0.5" Width="3.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAQAAgAAE4AWBIgUAAgAAAIIAACAgABAAQqA=</HashCode>
+      <HashCode>AAAAAAAAAQAAgAAE4AWBIgUAAgBAAIIAACAgABAAR7A=</HashCode>
       <FileName>Data.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Functions.Calculator">
     <Position X="0.5" Y="0.5" Width="1.5" />
