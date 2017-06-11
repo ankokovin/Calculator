@@ -107,7 +107,7 @@ namespace Functions
             ZeroFix();
         }
         /// <summary>
-        /// Конструктор числа <see cref="Data" по числу <see cref="long"/>/>
+        /// Конструктор числа <see cref="Data"/> по числу <see cref="long"/>
         /// </summary>
         /// <param name="Input">Исходное число типа <see cref="long"/></param>
         public Data(long Input):this(Input.ToString())
@@ -116,6 +116,10 @@ namespace Functions
         }
         #endregion Конструкторы
         #region Операторы сравнения
+        /// <summary>
+        /// Сравнение "больше" для чисел типа <see cref="Data"/>
+        /// </summary>
+        /// <returns>Результат сравнения <see cref="bool"/></returns>
         public static bool operator < (Data first, Data second)
         {
             if (first.Plus != second.Plus)
@@ -132,10 +136,18 @@ namespace Functions
             }
             return false;
         }
+        /// <summary>
+        /// Сравнение "меньше" для чисел типа <see cref="Data"/>
+        /// </summary>
+        /// <returns>Результат сравнения <see cref="bool"/></returns>
         public static bool operator >(Data first, Data second)
         {
             return !(first < second) && !(first == second);
         }
+        /// <summary>
+        /// Сравнение на равенство для чисел типа <see cref="Data"/>
+        /// </summary>
+        /// <returns>Результат сравнения <see cref="bool"/></returns>
         public static bool operator == (Data first, Data second)
         {
             if (first.Plus != second.Plus || first.Count != second.Count)
@@ -145,14 +157,26 @@ namespace Functions
             for (int i = 0; i < first.Count; i++) if (first.Digits[i] != second.Digits[i]) return false;
             return true;
         }
+        /// <summary>
+        /// Сравнение на неравенство для чисел типа <see cref="Data"/>
+        /// </summary>
+        /// <returns>Результат сравнения <see cref="bool"/></returns>
         public static bool operator != (Data first, Data second)
         {
             return !(first == second);
         }
+        /// <summary>
+        /// Сравнение "меньше или равно" для чисел типа <see cref="Data"/>
+        /// </summary>
+        /// <returns>Результат сравнения <see cref="bool"/></returns>
         public static bool operator <=(Data first, Data second)
         {
             return !(first > second);
         }
+        /// <summary>
+        /// Сравнение "больше или равно" для чисел типа <see cref="Data"/>
+        /// </summary>
+        /// <returns>Результат сравнения <see cref="bool"/></returns>
         public static bool operator >=(Data first, Data second)
         {
             return !(first > second);
@@ -173,7 +197,7 @@ namespace Functions
         /// <param name="first">Первое слагаемое типа <see cref="Data"/></param>
         /// <param name="second">Второе слагаемое типа <see cref="Data"/></param>
         /// <returns>Сумма слагаемых типа <see cref="Data"/></returns>
-        public static Data operator + (Data first, Data second)
+        public static Data operator +(Data first, Data second)
         {
             if (first.Plus != second.Plus)//если числа разных знаков, то следует юзать разность
             {
@@ -192,15 +216,16 @@ namespace Functions
                 }
                 s.Plus = !s.Plus;
                 return f - s;
-            } else
+            }
+            else
             {
                 Data result = new Data();
                 result.Plus = first.Plus;
-                long reminder=0;
-                int count=0;
+                long reminder = 0;
+                int count = 0;
                 for (int i = 0; i < Math.Max(first.Count, second.Count); i++)
                 {
-                    result.Digits[i] = first.Digits[i] + second.Digits[i]+reminder;
+                    result.Digits[i] = first.Digits[i] + second.Digits[i] + reminder;
                     reminder = result.Digits[i] / Base;
                     result.Digits[i] %= Base;
                     count++;
@@ -214,15 +239,24 @@ namespace Functions
                 return result;
             }
         }
+        /// <summary>
+        /// Инкремент числа типа <see cref="Data"/>
+        /// </summary>
         public static Data operator ++(Data input)
         {
             return input + One;
         }
+        /// <summary>
+        /// Декремент числа типа <see cref="Data"/>
+        /// </summary>
         public static Data operator --(Data input)
         {
             return input - One;
         }
         //Унарный минус
+        /// <summary>
+        ///Унарный минус для числа типа <see cref="Data"/>
+        /// </summary>
         public static Data operator -(Data input)
         {
             Data result = input.Copy();
@@ -349,8 +383,8 @@ namespace Functions
         /// <summary>
         /// Целочисленное деление числа типа <see cref="Data"/> на число типа <see cref="int"/> с округлением
         /// </summary>
-        /// <param name="first">Делимое типа <see cref="Data"/></param>
-        /// <param name="second">Делитель типа <see cref="int"/></param>
+        /// <param name="input">Делимое типа <see cref="Data"/></param>
+        /// <param name="div">Делитель типа <see cref="int"/></param>
         /// <returns>Частное типа <see cref="Data"/></returns>
         public static Data operator / (Data input,int div)
         {
