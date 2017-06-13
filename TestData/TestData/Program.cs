@@ -12,8 +12,8 @@ namespace TestData
         static void Main(string[] args)
         {
             #region Основные тесты
-            #region Тест конструторов+Copy
-            Console.WriteLine("Тест конструтора+Copy");
+            #region Тест конструкторов+Copy
+            Console.WriteLine("Тест конструктора+Copy");
             Console.WriteLine("По строке");
             Data d1 = new Data();
             Console.WriteLine(d1);

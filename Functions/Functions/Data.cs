@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 namespace Functions
 {
     /// <summary>
-    /// Непосредственно хранит длинные числа и содержит реализацию функций сложения, вычитания, умножения, целочисленного и нет деления
-    /// Способ хранения: массив из <see cref="N"/> разрядов <see cref="Base"/>-ичной системы исчисления типа <see cref="long"/>
+    /// <para>Непосредственно хранит длинные числа и содержит реализацию функций сложения, вычитания, умножения, целочисленного и нет деления</para>
+    /// <para>Способ хранения: массив из <see cref="N"/> разрядов <see cref="Base"/>-ичной системы исчисления типа <see cref="long"/></para>
     /// </summary>
     public class Data : ICloneable, IComparable
     {
@@ -117,7 +117,7 @@ namespace Functions
         #endregion Конструкторы
         #region Операторы сравнения
         /// <summary>
-        /// Сравнение "больше" для чисел типа <see cref="Data"/>
+        /// Сравнение "меньше" для чисел типа <see cref="Data"/>
         /// </summary>
         /// <returns>Результат сравнения <see cref="bool"/></returns>
         public static bool operator < (Data first, Data second)
@@ -137,7 +137,7 @@ namespace Functions
             return false;
         }
         /// <summary>
-        /// Сравнение "меньше" для чисел типа <see cref="Data"/>
+        /// Сравнение "больше" для чисел типа <see cref="Data"/>
         /// </summary>
         /// <returns>Результат сравнения <see cref="bool"/></returns>
         public static bool operator >(Data first, Data second)
@@ -183,17 +183,15 @@ namespace Functions
         }
         #endregion Операторы сравнения
         #region Арифметические действия
-        /*          Сложение
-         *  Возможные случаи:
-         *      1) Одинаковые знаки -> Выполняется обычное сложение, знак результата = знак входных чисел
-         *      2) Разные знаки -> Следует привести к вычитанию 
-         *          a+b = a-(-b) = b-(-a)
-         *          Наименьший следует использовать в качестве вычитаемого!
-         * 
-         */
         /// <summary>
         /// Сложение двух чисел типа <see cref="Data"/>
         /// </summary>
+        /// <remarks> Сложение
+        ///  Возможные случаи:
+        ///     1) Одинаковые знаки -> Выполняется обычное сложение, знак результата = знак входных чисел
+        ///     2) Разные знаки -> Следует привести к вычитанию 
+        ///         a+b = a-(-b) = b-(-a)
+        ///         Наименьший следует использовать в качестве вычитаемого!</remarks>
         /// <param name="first">Первое слагаемое типа <see cref="Data"/></param>
         /// <param name="second">Второе слагаемое типа <see cref="Data"/></param>
         /// <returns>Сумма слагаемых типа <see cref="Data"/></returns>
@@ -253,7 +251,6 @@ namespace Functions
         {
             return input - One;
         }
-        //Унарный минус
         /// <summary>
         ///Унарный минус для числа типа <see cref="Data"/>
         /// </summary>
@@ -263,17 +260,16 @@ namespace Functions
             result.Plus = !input.Plus;
             return result;
         }
-        /*          Вычитание
-         * Возможные случаи:
-         *          1) Одинаковые знаки
-         *              а)  first>=second - нормальное вычитание
-         *              б) first<second - замена на -(second-first)
-         *          2) Разные знаки -> Свести к сложению
-         *               a-b=a+(-b)
-         */
         /// <summary>
          /// Вычитание двух чисел типа <see cref="Data"/>
          /// </summary>
+         /// <remarks>        Вычитание
+         /// Возможные случаи:
+         ///          1) Одинаковые знаки
+         ///             а)  first больше (или равно) second - нормальное вычитание
+         ///             б) first меньше second - замена на -(second-first)
+         ///          2) Разные знаки -> Свести к сложению
+         ///               a-b=a+(-b)</remarks>
          /// <param name="first">Уменьшаемое типа <see cref="Data"/></param>
          /// <param name="second">Вычитаемое типа <see cref="Data"/></param>
          /// <returns>Разность типа <see cref="Data"/></returns>
@@ -301,10 +297,10 @@ namespace Functions
             result.ZeroFix();
             return result;
         }
-        //Умножение - обычное, столбиком
         /// <summary>
         /// Умножение двух чисел типа <see cref="Data"/>
         /// </summary>
+        /// <remarks>Умножение - обычное, столбиком</remarks>
         /// <param name="first">Первый множитель типа <see cref="Data"/></param>
         /// <param name="second">Второй множитель типа <see cref="Data"/></param>
         /// <returns>Произведение типа <see cref="Data"/></returns>
