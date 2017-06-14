@@ -33,19 +33,28 @@ namespace CalcFormApp
         #region Functions
         private void EqualsSomething_Click(object sender, EventArgs e)
         {
+
+            error = "";
             if (outputInfo.Text == "")
-                MessageBox.Show("Введите число в строку используя клавиатуру или мышь");
-            else
+                outputInfo.Text = "0";
+            
             {
                 if (lastOperand != "")
                 {
                     if (lastOperand == "/")
                     {
+
                         double temp = Calculator.Divide(operatorMemory, new Data(outputInfo.Text), out error);
-                        outputInfo.Text = temp.ToString();
-                        memory = operatorMemory;
-                        operatorMemory = null;
-                        lastOperand = "";
+                        if (error == "")
+                        {
+                            MessageBox.Show("Результат до приведения = " + temp.ToString());
+                            operatorMemory = temp;
+                            outputInfo.Text = operatorMemory.ToString();
+                            Calculator.operationsResults.Push(operatorMemory);
+                            memory = operatorMemory;
+                            operatorMemory = null;
+                            lastOperand = "";
+                        }
                     }
                     else
                     {
@@ -53,15 +62,25 @@ namespace CalcFormApp
                         memory = operatorMemory;
                         operatorMemory = null;
                         lastOperand = "";
-                        outputInfo.Text = memory.ToString();
+                        
                     }
                 }
                 else
                 {
                     memory = 0;
-                    outputInfo.Text = memory.ToString();
+                    if (Calculator.operationsResults.Count == 0 || Calculator.operationsResults.Peek().ToString() != outputInfo.Text)
+                        Calculator.operationsResults.Push(outputInfo.Text);
                 }
                 Dialog.ShowErrorMessage(error);
+            }
+            try
+            {
+                outputInfo.Text = Calculator.operationsResults.Peek().ToString();
+            }
+            catch(Exception)
+            {
+                outputInfo.Text = "0";
+                Calculator.operationsResults.Push("0");
             }
         }
         private void Plus_Click(object sender, EventArgs e)
@@ -262,7 +281,8 @@ namespace CalcFormApp
                 error = errorInfo.Message;
             }
             Dialog.ShowErrorMessage(error);
-        }
+            
+        } 
         private void PlusMinus_Click(object sender, EventArgs e)
         {
             if (outputInfo.Text.Length != 0)

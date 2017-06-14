@@ -28,16 +28,24 @@ namespace CalcFormApp
             error = "";
             if (lastOperand != "")
             {
-                if (lastOperand == "+")
-                    operatorMemory = Calculator.Sum(operatorMemory, new Data(num), out error);
-                if (lastOperand == "-")
-                    operatorMemory = Calculator.Dif(operatorMemory, new Data(num), out error);
-                if (lastOperand == "*")
-                    operatorMemory = Calculator.Multiply(operatorMemory, new Data(num), out error);
-                if (lastOperand == "%")
-                    operatorMemory = Calculator.Mod(operatorMemory, new Data(num), out error);
-                if (lastOperand == "Div")
-                    operatorMemory = Calculator.IntDivide(operatorMemory, new Data(num), out error);
+                if ((lastOperand == "/" || lastOperand == "Div" || lastOperand == "%") && num == "0")
+                    error = "Деление на 0";
+                else
+                {
+                    if (lastOperand == "+")
+                        operatorMemory = Calculator.Sum(operatorMemory, new Data(num), out error);
+                    if (lastOperand == "-")
+                        operatorMemory = Calculator.Dif(operatorMemory, new Data(num), out error);
+                    if (lastOperand == "*")
+                        operatorMemory = Calculator.Multiply(operatorMemory, new Data(num), out error);
+                    if (lastOperand == "%")
+                        operatorMemory = Calculator.Mod(operatorMemory, new Data(num), out error);
+                    if (lastOperand == "Div")
+                        operatorMemory = Calculator.IntDivide(operatorMemory, new Data(num), out error);
+                    if (lastOperand == "/")
+                        operatorMemory = Calculator.Divide(operatorMemory, new Data(num), out error);
+                }
+                
                 return true;
             }
             return false;
