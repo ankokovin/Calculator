@@ -224,8 +224,8 @@ namespace Functions
                 int count = 0;
                 for (int i = 0; i < Math.Max(first.Count, second.Count); i++)
                 {
-                    result.Digits[i] = first.Digits[i] + second.Digits[i] + reminder;
-                    reminder = result.Digits[i] / Base;
+                    result.Digits[i] = first.Digits[i] + second.Digits[i] + rr;
+                    reminder = result.Digits[i] / Base;eminde
                     result.Digits[i] %= Base;
                     count++;
                 }

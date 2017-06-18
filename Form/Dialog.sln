@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26014.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormAppMenu", "CalcFormApp\FormAppMenu.csproj", "{A180C36C-E40F-4163-A1F6-0F3DFFFC7543}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Functions", "..\Functions\Functions\Functions.csproj", "{C98B3225-6B9B-4395-9304-6FF08999D969}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,14 +21,6 @@ Global
 		{A180C36C-E40F-4163-A1F6-0F3DFFFC7543}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A180C36C-E40F-4163-A1F6-0F3DFFFC7543}.Release|x86.ActiveCfg = Release|Any CPU
 		{A180C36C-E40F-4163-A1F6-0F3DFFFC7543}.Release|x86.Build.0 = Release|Any CPU
-		{C98B3225-6B9B-4395-9304-6FF08999D969}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C98B3225-6B9B-4395-9304-6FF08999D969}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C98B3225-6B9B-4395-9304-6FF08999D969}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{C98B3225-6B9B-4395-9304-6FF08999D969}.Debug|x86.Build.0 = Debug|Any CPU
-		{C98B3225-6B9B-4395-9304-6FF08999D969}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C98B3225-6B9B-4395-9304-6FF08999D969}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C98B3225-6B9B-4395-9304-6FF08999D969}.Release|x86.ActiveCfg = Release|Any CPU
-		{C98B3225-6B9B-4395-9304-6FF08999D969}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
