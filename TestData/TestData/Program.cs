@@ -11,13 +11,15 @@ namespace TestData
 {
     class Program
     {
+        static int count = 0;
+        static void Act()
+        {
+            count++;
+            DataTest1(count);
+        }
         static void DataTest1(int x)
         {
-            Data d = Data.MaxValue / x;
-            d = Data.MaxValue - new Data(x);
-            d = Data.MaxValue / new Data(x);
-            d = new Data(x) * new Data(x);
-            Thread.Sleep(100);
+            Data d = new Data(x) * new Data(x);
         }
         static void Main(string[] args)
         {
@@ -25,18 +27,31 @@ namespace TestData
             //{ 99997}
             Data d = Data.MaxValue / new Data(99997);
             Stopwatch st = new Stopwatch();
+            int n = 1000000;
             st.Start();
-            Parallel.For(1, 100000, DataTest1);
+            Parallel.For(1, n, DataTest1);
             st.Stop();
-            Console.WriteLine(st.Elapsed.TotalSeconds);
+            Console.WriteLine("Через Parallel:"+st.Elapsed.TotalSeconds);
             st.Reset();
             st.Start();
-            for (int i = 1; i < 100000; i++)
+            for (int i = 1; i < n; i++)
             {
                 DataTest1(i);
             }
             st.Stop();
-            Console.WriteLine(st.Elapsed.TotalSeconds);
+            Console.WriteLine("Через цикл"+st.Elapsed.TotalSeconds);
+            st.Reset();
+            st.Start();
+            TaskFactory tf = new TaskFactory();
+            List<Task> l = new List<Task>();
+            for (int i = 0; i < n; i++)
+            {
+                l.Add(tf.StartNew(Act));
+            }
+            Task.WaitAll(l.ToArray());
+            st.Stop();
+            Console.WriteLine("Через TaskFactory"+st.Elapsed.TotalSeconds);
+            st.Reset();
             Console.ReadLine();
             return;
             /*

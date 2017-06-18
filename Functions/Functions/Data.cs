@@ -357,7 +357,7 @@ namespace Functions
             if (second == Data.One) return first;
             if (second.Count == 1)
             {
-                Data res = first / second.Digits[0];
+                Data res = first / (int)second.Digits[0];
                 res.Plus = !(first.Plus ^ second.Plus);
                 return res;
             }
