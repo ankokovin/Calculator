@@ -1,16 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using Functions;
 
 namespace TestData
 {
     class Program
     {
+        static void DataTest1(int x)
+        {
+            Data d = Data.MaxValue / x;
+            d = Data.MaxValue - new Data(x);
+            d = Data.MaxValue / new Data(x);
+            d = new Data(x) * new Data(x);
+            Thread.Sleep(100);
+        }
         static void Main(string[] args)
         {
+            // 4999999999999999999999999}
+            //{ 99997}
+            Data d = Data.MaxValue / new Data(99997);
+            Stopwatch st = new Stopwatch();
+            st.Start();
+            Parallel.For(1, 100000, DataTest1);
+            st.Stop();
+            Console.WriteLine(st.Elapsed.TotalSeconds);
+            st.Reset();
+            st.Start();
+            for (int i = 1; i < 100000; i++)
+            {
+                DataTest1(i);
+            }
+            st.Stop();
+            Console.WriteLine(st.Elapsed.TotalSeconds);
+            Console.ReadLine();
+            return;
+            /*
             #region Основные тесты
             #region Тест конструкторов+Copy
             Console.WriteLine("Тест конструктора+Copy");
@@ -570,6 +599,7 @@ namespace TestData
             foreach (Data d in ar) Console.WriteLine(d);
             Console.ReadLine();
             #endregion Различные другие тесты
+            */
         }
     }
 }

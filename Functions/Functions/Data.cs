@@ -81,6 +81,7 @@ namespace Functions
         {
             
         }
+        static Regex check = new Regex("^-?[0-9]+$");
         /// <summary>
         /// Инициализация числа типа <see cref="Data"/> по строке <see cref="string"/>
         /// </summary>
@@ -88,7 +89,7 @@ namespace Functions
         public Data(string Input) 
         {
             if (Input.Length > 26) throw new Exception("Слишком большая строка");
-            Regex check = new Regex("^-?[0-9]+$");
+            
             if (!check.IsMatch(Input)) throw new Exception("Неверное представление");
             if (Input[0] == '-')
             {
@@ -354,6 +355,12 @@ namespace Functions
         {
             if (second == new Data()) throw new Exception("Деление на 0");
             if (second == Data.One) return first;
+            if (second.Count == 1)
+            {
+                Data res = first / second.Digits[0];
+                res.Plus = !(first.Plus ^ second.Plus);
+                return res;
+            }
             Data right = (Abs(first.Copy()));
             if (right<MaxValue) right++;
             Data left = new Data();
